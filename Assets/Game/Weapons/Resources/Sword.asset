@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: 
   weaponDamage: 10
-  weaponRange: 3
+  percentageBonus: 20
+  weaponRange: 2
   isRightHanded: 1
   projectile: {fileID: 0}
   animatorOverride: {fileID: 22100000, guid: 35ea43ebff20fea4d8cd17fe859fa447, type: 2}

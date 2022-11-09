@@ -20,6 +20,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 597572161803505107, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: shouldUseModifiers
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 597572161803505107, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
       propertyPath: levelUpParticleEffect
       value: 
       objectReference: {fileID: 861678867403718971, guid: 0cbf0c5b1dd389f4fbdcced51609e755, type: 3}
@@ -119,6 +123,18 @@ PrefabInstance:
       propertyPath: rightHandTransform
       value: 
       objectReference: {fileID: 7749840432429312901}
+    - target: {fileID: 6182378445021986676, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6182378445021986676, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8675300331888877431, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
 --- !u!4 &5202444462827162626 stripped
@@ -170,6 +186,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dff77e854f59ad46844849208f228c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxPathLength: 40
+  cursorMappings:
+  - type: 0
+    texture: {fileID: 2800000, guid: 21628736160fcc9488493401da3ef621, type: 3}
+    hotspot: {x: 0, y: 0}
+  - type: 3
+    texture: {fileID: 2800000, guid: 44a99ee545fd8ba46a452b12c1f9378b, type: 3}
+    hotspot: {x: 0, y: 0}
+  - type: 1
+    texture: {fileID: 2800000, guid: 8859fce41c5d0a148ad0b7eebfca7fe9, type: 3}
+    hotspot: {x: 0, y: 0}
+  - type: 2
+    texture: {fileID: 2800000, guid: ce721f19cdaf0c94aa847c79afb72708, type: 3}
+    hotspot: {x: 0, y: 0}
+  - type: 4
+    texture: {fileID: 2800000, guid: 2b561569485d156429a42f8b103c2037, type: 3}
+    hotspot: {x: 0, y: 0}
+  maxNavMeshProjectionDistance: 1
 --- !u!1001 &7749840432429718667
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using RPG.Core;
 using RPG.Combat;
 using RPG.Movement;
 using RPG.Attributes;
 using UnityEngine;
 using System;
+using GameDevTV.Utils;
 
 namespace RPG.Control
 {
@@ -23,18 +22,29 @@ namespace RPG.Control
         Mover mover;
         Fighter fighter;
 
-        Vector3 defaultPosition;
+        LazyValue<Vector3> defaultPosition;
         float timeSinceLastSawPlayer = Mathf.Infinity;
         float timeSinceArrivedAtWaypoint = Mathf.Infinity;
         int currentWaypointIndex = 0;
 
-        void Start() {
+        private void Awake() 
+        {
             player = GameObject.FindWithTag("Player");
             health = GetComponent<Health>();
             mover = GetComponent<Mover>();
-            fighter = GetComponent<Fighter>();
+            fighter = GetComponent<Fighter>();  
+            
+            defaultPosition = new LazyValue<Vector3>(GetDefaultPosition);
+        }
 
-            defaultPosition = transform.position;
+        private Vector3 GetDefaultPosition()
+        {
+            return transform.position;
+        }
+
+        void Start() 
+        {
+            defaultPosition.ForceInit();
         }
 
         void Update()
@@ -66,7 +76,7 @@ namespace RPG.Control
         // Default bahaviour is patrol
         private void DefaultBehaviour()
         {
-            Vector3 nextPosition = defaultPosition;
+            Vector3 nextPosition = defaultPosition.value;
             if (aiPath != null)
             {
                 if (AtWaypoint())

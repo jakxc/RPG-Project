@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Bow Blue Arrow
   m_EditorClassIdentifier: 
   weaponDamage: 5
+  percentageBonus: 20
   weaponRange: 20
   isRightHanded: 0
   projectile: {fileID: 1622742163953582298, guid: ba3635db082ff6d45ae6fdffe16d7c5f, type: 3}

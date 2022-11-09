@@ -167,6 +167,18 @@ PrefabInstance:
       propertyPath: rightHandTransform
       value: 
       objectReference: {fileID: 7176502058229082625}
+    - target: {fileID: 6182378445021986676, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6182378445021986676, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8675300331888877431, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 652599562919450684, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}

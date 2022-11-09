@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Fireball
   m_EditorClassIdentifier: 
   weaponDamage: 5
+  percentageBonus: 20
   weaponRange: 15
   isRightHanded: 0
   projectile: {fileID: 3179943530374249859, guid: 7483c3eca66acb14abb6008d7ca25c60, type: 3}
