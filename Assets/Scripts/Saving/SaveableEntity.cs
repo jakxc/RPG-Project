@@ -1,9 +1,6 @@
-using System;
 using System.Collections.Generic;
-using RPG.Core;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace RPG.Saving
 {
@@ -23,6 +20,7 @@ namespace RPG.Saving
             Dictionary<string, object> state = new Dictionary<string, object>();
             foreach (ISaveable saveable in GetComponents<ISaveable>())
             {
+                // GetType() returns type of class it is during run-time (e.g Mover, Fighter etc)
                 state[saveable.GetType().ToString()] = saveable.CaptureState();
             }
             return state;
@@ -41,9 +39,11 @@ namespace RPG.Saving
             }
         }
 
+// Exclude code when building and run when in Unity Editor
 #if UNITY_EDITOR
         private void Update() {
             if (Application.IsPlaying(gameObject)) return;
+            // To prevent prefabs from getting UUID
             if (string.IsNullOrEmpty(gameObject.scene.path)) return;
 
             SerializedObject serializedObject = new SerializedObject(this);
@@ -59,21 +59,21 @@ namespace RPG.Saving
         }
 #endif
 
-        private bool IsUnique(string candidate)
+        private bool IsUnique(string key)
         {
-            if (!globalLookup.ContainsKey(candidate)) return true;
+            if (!globalLookup.ContainsKey(key)) return true;
 
-            if (globalLookup[candidate] == this) return true;
+            if (globalLookup[key] == this) return true;
 
-            if (globalLookup[candidate] == null)
+            if (globalLookup[key] == null)
             {
-                globalLookup.Remove(candidate);
+                globalLookup.Remove(key);
                 return true;
             }
 
-            if (globalLookup[candidate].GetUniqueIdentifier() != candidate)
+            if (globalLookup[key].GetUniqueIdentifier() != key)
             {
-                globalLookup.Remove(candidate);
+                globalLookup.Remove(key);
                 return true;
             }
 

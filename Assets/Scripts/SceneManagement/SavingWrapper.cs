@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using RPG.Saving;
 using UnityEngine;
 
@@ -8,7 +6,7 @@ namespace RPG.SceneManagement
 {
     public class SavingWrapper : MonoBehaviour
     {
-        const string defaultSaveFile = "save";
+        const string defaultSaveFile = "RPG";
         [SerializeField] float fadeInTime = 0.2f;
 
         private void Awake() 
