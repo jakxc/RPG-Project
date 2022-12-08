@@ -30,7 +30,11 @@ namespace RPG.Movement {
             NavMeshPath path = new NavMeshPath();
             bool hasPath = NavMesh.CalculatePath(transform.position, destination, NavMesh.AllAreas, path);
             if(!hasPath) return false;
+            
+            // path.status returns whether there is a path from transform.position to destination
             if (path.status != NavMeshPathStatus.PathComplete) return false;
+           
+            // If length of path is longer than max allowed length path, then this cannot move to the destination
             if (GetPathLength(path) > maxPathLength) return false;
             
             return true;
@@ -45,6 +49,7 @@ namespace RPG.Movement {
 
         public void StartMoveAction(Vector3 destination, float speedFraction)
         {
+            // Set current action to movement
             GetComponent<ActionScheduler>().StartAction(this);
             MoveTo(destination, speedFraction);
         }
@@ -57,15 +62,22 @@ namespace RPG.Movement {
         private void UpdateAnimator()
         {
             Vector3 velocity = GetComponent<NavMeshAgent>().velocity;
-            Vector3 localVelocity = transform.InverseTransformDirection(velocity);
+            /*Covert from global velocity to local so regardless of where this is in the world,
+            the velocity will be a value that will represent direction and speed*/
+            Vector3 localVelocity = transform.InverseTransformDirection(velocity); 
             float speed = localVelocity.z;
+
+            // Set forwardSpeed float parameter to speed (the velocity in the z direction)
             GetComponent<Animator>().SetFloat("forwardSpeed", speed);
         }
+
         private float GetPathLength(NavMeshPath path)
         {
             float total = 0f;
             if (path.corners.Length < 2) return total;
 
+            /*Add the distance of all path corner pairs in order from first index to last.
+            This will give total distance of path*/
             for (int i = 0; i < path.corners.Length - 1; i++)
             {
                 total += Vector3.Distance(path.corners[i], path.corners[i + 1]);
@@ -74,7 +86,7 @@ namespace RPG.Movement {
             return total;
         }
 
-        [System.Serializable]
+        [System.Serializable] // Serializable so this data can be converted to binary
         struct MoverSaveData
         {
             public SerializableVector3 position;

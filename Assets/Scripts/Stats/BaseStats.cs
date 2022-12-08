@@ -6,15 +6,15 @@ namespace RPG.Stats
 {
     public class BaseStats : MonoBehaviour
     {
-        [Range(1, 99)]
-        [SerializeField] int startingLevel = 1;
+        [SerializeField] [Range(1, 99)] int startingLevel = 1;
         [SerializeField] bool shouldUseModifiers = false;
         [SerializeField] CharacterClass characterClass;
-        [SerializeField] Progression progression = null;
+        [SerializeField] Progression progression = null; 
         [SerializeField] GameObject levelUpParticleEffect = null;
         Experience experience; 
         public event Action onLevelUp; 
         LazyValue<int> currentLevel;
+        
         private void Awake() 
         {
             experience = GetComponent<Experience>();
@@ -60,6 +60,9 @@ namespace RPG.Stats
 
         public float GetStat(Stat stat)
         {
+            /*Add the additive modifiers before calculating the % added by the percentage modifiers.
+            E.g if additive modifier is 20 and percentage modifier is 10, when added to base stat of 100,
+            it would get the 10% of 100+20 instead of the base stat of 100*/
             return (GetBaseStat(stat) + GetAdditiveModifiers(stat)) * (1 + GetPercentageModifiers(stat) / 100);
         }
 
@@ -88,6 +91,9 @@ namespace RPG.Stats
             if (!shouldUseModifiers) return 0;
 
             float total = 0f;
+
+            /*Find all the IModifierProvider and add all the additivemodifiers of stat (e.g health, damage etc.).
+            This total represents the added bonuses that these components give (e.g Sword damage + base damage of player)*/
             foreach (IModifierProvider provider in GetComponents<IModifierProvider>())
             {
                 foreach (float modifier in provider.GetAdditiveModifiers(stat))
@@ -113,17 +119,20 @@ namespace RPG.Stats
             }
             
             float currentXP = experience.GetExperience();
+            // Get the level one below max level
             int penultimateLevel = progression.GetLevels(Stat.ExperienceToLevelUp, characterClass);
             
-            for (int level = 1; level < penultimateLevel; level++)
+            for (int level = 1; level <= penultimateLevel; level++)
             {
                 float XPToLevelUp = progression.GetStat(Stat.ExperienceToLevelUp, characterClass, level);
+                // If the currentXP is less than the cumulative XP required to reach level, return the level
                 if (XPToLevelUp > currentXP)
                 {
                     return level;
                 }
             }
             
+            // Else if the currentXP is greater than the mx XPToLevelUp, return the max level (cannot go beyond max level)
             return penultimateLevel + 1;
         }
     }   

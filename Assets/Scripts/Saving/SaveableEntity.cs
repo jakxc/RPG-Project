@@ -5,9 +5,12 @@ using UnityEngine;
 namespace RPG.Saving
 {
     [ExecuteAlways]
-    public class SaveableEntity : MonoBehaviour
+    public class SaveableEntity : MonoBehaviour // Should be attached to all GameObjects that have components that implement ISaveable
     {
-        [SerializeField] string uniqueIdentifier = "";
+        [SerializeField] string uniqueIdentifier = ""; // 128 bits. Only set a constant value if this is consistent between scenes (e.g player)
+        
+        /*This Dictionary stores all this GameObject's data that is captured. This data can be looked up
+        using the uniqueIdentifier as the key and value as this SaveableEntity*/
         static Dictionary<string, SaveableEntity> globalLookup = new Dictionary<string, SaveableEntity>();
 
         public string GetUniqueIdentifier()
@@ -20,8 +23,9 @@ namespace RPG.Saving
             Dictionary<string, object> state = new Dictionary<string, object>();
             foreach (ISaveable saveable in GetComponents<ISaveable>())
             {
-                // GetType() returns type of class it is during run-time (e.g Mover, Fighter etc)
-                state[saveable.GetType().ToString()] = saveable.CaptureState();
+                /* GetType() returns type of class it is during run-time (e.g Mover, Fighter etc)
+                During compile time, saveable type will be ISaveable*/
+                state[saveable.GetType().ToString()] = saveable.CaptureState(); 
             }
             return state;
         }
@@ -39,23 +43,23 @@ namespace RPG.Saving
             }
         }
 
-// Exclude code when building and run when in Unity Editor
+// Exclude code only when building and running in Unity Editor
 #if UNITY_EDITOR
         private void Update() {
-            if (Application.IsPlaying(gameObject)) return;
-            // To prevent prefabs from getting UUID
-            if (string.IsNullOrEmpty(gameObject.scene.path)) return;
+            if (Application.IsPlaying(gameObject)) return; // If in playmode, do nothing (only add UUID key and this as value if not in playmode)
+            if (string.IsNullOrEmpty(gameObject.scene.path)) return; // If gameObject has empty path, means its in prefab and not in scene, do nothing
 
             SerializedObject serializedObject = new SerializedObject(this);
             SerializedProperty property = serializedObject.FindProperty("uniqueIdentifier");
             
+            // If UUID is empty or not unique (something else has this UUID), generate a new UUID
             if (string.IsNullOrEmpty(property.stringValue) || !IsUnique(property.stringValue))
             {
-                property.stringValue = System.Guid.NewGuid().ToString();
-                serializedObject.ApplyModifiedProperties();
+                property.stringValue = System.Guid.NewGuid().ToString(); // Generate new UUID
+                serializedObject.ApplyModifiedProperties(); // Apply the newly generated UUID to this serialized object
             }
 
-            globalLookup[property.stringValue] = this;
+            globalLookup[property.stringValue] = this; // Add this UUID (key) and set its value to this into globalLookup dictionary
         }
 #endif
 

@@ -10,11 +10,11 @@ namespace RPG.Combat
     public class WeaponConfig : ScriptableObject
     {
         [SerializeField] float weaponDamage = 5f;
-        [SerializeField] float percentageBonus = 0f;
+        [SerializeField] float percentageBonus = 0f; // % bonus that will be added to base damage when equipped 
         [SerializeField] float weaponRange = 2f;
         [SerializeField] bool isRightHanded = true;
         [SerializeField] Projectile projectile = null;
-        [SerializeField] AnimatorOverrideController animatorOverride = null;
+        [SerializeField] AnimatorOverrideController animatorOverride = null; // Animator controller specific to weapon equipped
         [SerializeField] Weapon equipPrefab = null;
 
         const string weaponName = "Weapon";
@@ -27,17 +27,21 @@ namespace RPG.Combat
 
             if (equipPrefab != null)
             {
-                Transform handTransform = GetTransform(rightHand, leftHand);
+                Transform handTransform = GetTransform(rightHand, leftHand); // Determines if weapon is equip on right or left hand
                 weapon = Instantiate(equipPrefab, handTransform);
-                weapon.gameObject.name = weaponName;
+                weapon.gameObject.name = weaponName; // Set weaponName to WeaponConfig name for saving/loading purposes
             }
 
+            /* Cast as AnimatorOverrideController to be able to set it as default animator controller if
+             animatorOverride is null*/
             var overrideController = anim.runtimeAnimatorController as AnimatorOverrideController;
             if (animatorOverride != null)
             {
-                anim.runtimeAnimatorController = animatorOverride;
+                anim.runtimeAnimatorController = animatorOverride; // If there is animator override for weapon, set it as runtime animator controller
             }
-            else if (overrideController != null)
+            /*If the weapon does not have animator override set, set animator controller as default animator controller.
+            This prevents this from using previous WeaponConfig animator override controller (e.g fireball using sword animation) */
+            else if (overrideController != null) 
             {
                 anim.runtimeAnimatorController = overrideController.runtimeAnimatorController;
                 

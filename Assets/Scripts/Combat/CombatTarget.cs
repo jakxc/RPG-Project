@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace RPG.Combat
 {
+    // If an object has CombatTarget component, it must also have Health component
     [RequireComponent(typeof(Health))]
     public class CombatTarget : MonoBehaviour, IRaycastable
     {
@@ -14,11 +15,13 @@ namespace RPG.Combat
 
         public bool HandleRaycast(PlayerController controller)
         {
+            // If player cannot attack this CombatTarget, do nothing
             if(!controller.GetComponent<Fighter>().CanAttack(gameObject)) 
             {
                 return false;
             }
 
+            // If user clicks on CombatTarget, player attack this CombatTarget
             if (Input.GetMouseButton(0))
             {
                 controller.GetComponent<Fighter>().Attack(gameObject);

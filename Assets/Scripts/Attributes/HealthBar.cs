@@ -8,17 +8,34 @@ namespace RPG.Attributes
         [SerializeField] RectTransform foreground = null;
         [SerializeField] Canvas rootCanvas = null;
     
-        // Update is called once per frame
-        void Update()
+        private void OnEnable()    
         {
-            rootCanvas.enabled = true;
-            foreground.localScale = new Vector3(health.GetFraction(), 1, 1);
-            
-            if (Mathf.Approximately(health.GetFraction(), 0) || Mathf.Approximately(health.GetFraction(), 1))
+              health.onHealthUpdated += UpdateHealthBar;
+              health.onNoHealthLeft += DisableHealthBar;
+        }
+
+        private void OnDisable()    
+        {
+              health.onHealthUpdated -= UpdateHealthBar;
+              health.onNoHealthLeft -= DisableHealthBar;
+        }
+   
+        private void UpdateHealthBar()
+        {   
+            // If health is zero or full, do not display health bar
+            if (Mathf.Approximately(health.GetFraction(), 0) || Mathf.Approximately(health.GetFraction(), 1)) 
             {
                 rootCanvas.enabled = false;
                 return;
             }
+
+            rootCanvas.enabled = true;
+            foreground.localScale = new Vector3(health.GetFraction(), 1.0f, 1.0f);
+        }
+
+        private void DisableHealthBar()
+        {
+              rootCanvas.enabled = false;
         }
     }
 }

@@ -83,9 +83,13 @@ PrefabInstance:
       propertyPath: m_Speed
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1805444434, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: m_Acceleration
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 597572161803505107, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
       propertyPath: characterClass
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 652599562308910438, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
       propertyPath: m_RootOrder
@@ -195,6 +199,10 @@ PrefabInstance:
       propertyPath: rightHandTransform
       value: 
       objectReference: {fileID: 7176502058229082625}
+    - target: {fileID: 5423248485959957397, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: timeBetweenAttacks
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 6182378445021986676, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -202,6 +210,10 @@ PrefabInstance:
     - target: {fileID: 6182378445021986676, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
       propertyPath: m_LocalPosition.y
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6579102555058100806, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: maxSpeed
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8675300331888877431, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
       propertyPath: m_RootOrder
@@ -259,8 +271,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chaseDistance: 5
-  suspisionTime: 5
+  mobDistance: 5
+  suspicionTime: 3
+  aggroCooldownTime: 3
   waypointTolerance: 1
-  waypointDwellTime: 2
-  defaultSpeedFraction: 0.2
+  minDwellTime: 1
+  maxDwellTime: 8
+  defaultSpeedFraction: 0.25
   aiPath: {fileID: 0}

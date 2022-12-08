@@ -174,6 +174,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   experiencePoints: 0
+--- !u!114 &3629057074953799310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5202444462827162654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06be7c255b1a2964fb17da94228fcd31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7832433789577301362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,13 +206,13 @@ MonoBehaviour:
     texture: {fileID: 2800000, guid: 44a99ee545fd8ba46a452b12c1f9378b, type: 3}
     hotspot: {x: 0, y: 0}
   - type: 1
-    texture: {fileID: 2800000, guid: 8859fce41c5d0a148ad0b7eebfca7fe9, type: 3}
+    texture: {fileID: 2800000, guid: 6fdfcd4167ed5e7488584241bb671bb2, type: 3}
     hotspot: {x: 0, y: 0}
   - type: 2
     texture: {fileID: 2800000, guid: ce721f19cdaf0c94aa847c79afb72708, type: 3}
     hotspot: {x: 0, y: 0}
   - type: 4
-    texture: {fileID: 2800000, guid: 2b561569485d156429a42f8b103c2037, type: 3}
+    texture: {fileID: 2800000, guid: 99b4ff6ea44bbe24691a30e9fcef0693, type: 3}
     hotspot: {x: 0, y: 0}
   maxNavMeshProjectionDistance: 1
   rayCastRadius: 1

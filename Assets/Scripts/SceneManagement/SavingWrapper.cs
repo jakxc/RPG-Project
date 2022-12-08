@@ -11,15 +11,16 @@ namespace RPG.SceneManagement
 
         private void Awake() 
         {
-            StartCoroutine(LoadLastScene());
+            StartCoroutine(LoadLastScene()); 
         }
         
         IEnumerator LoadLastScene() 
         {
-            yield return GetComponent<SavingSystem>().LoadLastScene(defaultSaveFile);
             Fader fader = FindObjectOfType<Fader>();
-            fader.FadeOutImmediate();
-            yield return fader.FadeIn(fadeInTime);
+            fader.FadeOutImmediate(); // Fade out so scene cannot be viewed
+            
+            yield return GetComponent<SavingSystem>().LoadLastScene(defaultSaveFile); // Load last scene
+            yield return fader.FadeIn(fadeInTime); // Fade in after everything from last scene has been loaded
         }
 
         // Update is called once per frame

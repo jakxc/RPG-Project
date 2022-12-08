@@ -7,7 +7,7 @@ namespace RPG.Combat
 {
     public class WeaponPickup : MonoBehaviour, IRaycastable
     {
-        [SerializeField] WeaponConfig weapon = null;
+        [SerializeField] WeaponConfig weapon = null; // The weapon that will be equipped if player picks this up
         [SerializeField] float healthToRestore = 0f;
         [SerializeField] float respawnTime = 5f;
         
@@ -43,8 +43,10 @@ namespace RPG.Combat
 
         private void ShowPickup(bool shouldShow)
         {
+            // Enable/Disable collider of this when other objects should/should not interact with this
             GetComponent<Collider>().enabled = shouldShow;
             
+            // For each child transform of this, set active to shouldShow toggle boolean
             foreach(Transform child in transform) 
             {
                 child.gameObject.SetActive(shouldShow);
@@ -55,7 +57,7 @@ namespace RPG.Combat
         {
             if (Input.GetMouseButton(0))
             {
-                Pickup(controller.gameObject);
+                controller.GetComponent<Interactor>().Collect(gameObject);
             }
             return true;
         }

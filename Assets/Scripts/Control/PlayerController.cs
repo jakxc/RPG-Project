@@ -1,10 +1,9 @@
-using RPG.Combat;
-using RPG.Movement;
-using RPG.Attributes;
-using UnityEngine;
 using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.AI;
+using RPG.Movement;
+using RPG.Attributes;
 
 namespace RPG.Control 
 {
@@ -20,9 +19,9 @@ namespace RPG.Control
             public Vector2 hotspot;
         }
 
-        [SerializeField] CursorMapping[] cursorMappings = null;
+        [SerializeField] CursorMapping[] cursorMappings = null; // Array of different cursors for each interaction
         [SerializeField] float maxNavMeshProjectionDistance = 1f;
-        [SerializeField] float rayCastRadius = 1f;
+        [SerializeField] float rayCastRadius = 0.5f;
 
         void Awake() 
         {
@@ -35,7 +34,7 @@ namespace RPG.Control
             
             if (health.IsDead()) 
             {
-                SetCursor(CursorType.None);
+                SetCursor(CursorType.None); // If player is dead, set cursor type to CursorType.None
                 return;
             }
 
@@ -47,10 +46,12 @@ namespace RPG.Control
 
         private bool InteractWithComponent()
         {
-            RaycastHit[] hits = RaycastAllSorted();
+            RaycastHit[] hits = RaycastAllSorted(); // hits array sorted by distance to ray origin
 
             foreach (RaycastHit hit in hits)
             {
+                /*Get all IRaycastable that is hit and perform the action in HandleRaycast().
+                Set the cursor type to the cursor type set in IRaycastables*/
                 IRaycastable[] raycastables = hit.transform.GetComponents<IRaycastable>();
                 foreach (IRaycastable raycastable in raycastables)
                 {
@@ -67,14 +68,17 @@ namespace RPG.Control
 
         RaycastHit[] RaycastAllSorted()
         {
+            // Uses SphereCast to allow of ease of clicking on smaller GameObjects (pickups, enemies etc.)
             RaycastHit[] hits = Physics.SphereCastAll(GetMouseRay(), rayCastRadius);
             float[] distances = new float[hits.Length];
 
+            // For all the hits in the hits array, add the distance of the ray to the hit to the distances array
             for (int i = 0; i < hits.Length; i++)
             {
                 distances[i] = hits[i].distance;
             }
             
+            // Sort the hits array based on distances (so closest to ray origin will be hits[0])
             Array.Sort(distances, hits);
 
             return hits;
@@ -117,11 +121,15 @@ namespace RPG.Control
             if(!hasHit) return false;
             
             NavMeshHit navMashHit;
+            
+            /*SamplePosition finds the nearest point based on the NavMesh within a specified range.
+            In this case, it will return false if this is not within maxNavMeshProjectionDistance 
+            from hit.point */
             bool hasCastToNavMesh = NavMesh.SamplePosition(
                 hit.point, out navMashHit, maxNavMeshProjectionDistance, NavMesh.AllAreas);
             if (!hasCastToNavMesh) return false;
 
-            target = navMashHit.position;
+            target = navMashHit.position; // Position on the NavMesh that has been cast to (hit)
 
             return true;
         }

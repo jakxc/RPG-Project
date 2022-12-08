@@ -1,27 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
 using RPG.Core;
 using RPG.Stats;
 using RPG.Saving;
-using UnityEngine;
-using System;
 using GameDevTV.Utils;
+using UnityEngine;
 using UnityEngine.Events;
+using System;
 
 namespace RPG.Attributes
 {
+    // Health is placed in Attributes directory to avoid circular dependecy that could occur when placed in Core namespace
     public class Health : MonoBehaviour, ISaveable
     {
-        [SerializeField] float regenerationPercentage = 70f;
+        [SerializeField] float regenerationPercentage = 70f; // % of health that is added when this levels up
         [SerializeField] TakeDamageEvent takeDamage;
         [SerializeField] UnityEvent onDied;
 
+        /* This is used because cannot Unity cannot serialize UnityEvent<float> (classes with chevrons). Select Dynamic float in
+        Unity Editor to allow the float passed into this event to be used in functions triggered by 
+        this event*/ 
         [System.Serializable]
         public class TakeDamageEvent : UnityEvent<float>
         {
         }
 
-        LazyValue<float> healthPoints;
+        public event Action onHealthUpdated;
+        public event Action onNoHealthLeft;
+
+        /* Setting healthpoints as type LazyValue<float> ensures that healthPoints are 
+        set to something in Awake so it is not null and set its value when it is first used*/
+        LazyValue<float> healthPoints; 
         bool hasDied;
         
         private void Awake() 
@@ -36,17 +43,18 @@ namespace RPG.Attributes
 
         private void Start() 
         { 
-            healthPoints.ForceInit();
+            healthPoints.ForceInit(); // Initialise healthpoints if it has not already been before Start() is called
+            onHealthUpdated.Invoke();
         }
 
         private void OnEnable() 
         {
-            GetComponent<BaseStats>().onLevelUp += RegenerateHealth;    
+            GetComponent<BaseStats>().onLevelUp += RegenerateHealth; // Subscribe to onLevelUp event in OnEnable  
         }
 
         private void OnDisable() 
         {
-            GetComponent<BaseStats>().onLevelUp -= RegenerateHealth;
+            GetComponent<BaseStats>().onLevelUp -= RegenerateHealth;  // Unsubscribe to onLevelUp event in OnDisable  
         }
 
         public bool IsDead()
@@ -54,19 +62,23 @@ namespace RPG.Attributes
             return hasDied;
         }
 
-        public void TakeDamage(GameObject sourceofDamage, float damage)
+        /* sourceOfDamage passed in as Parameter to determine how much experience reward
+         the sourceOfDamage should receive from this*/
+        public void TakeDamage(GameObject sourceOfDamage, float damage)
         {
             healthPoints.value = Mathf.Max(healthPoints.value - damage, 0);
             
             if (healthPoints.value == 0)
             {
-                onDied.Invoke();
+                onNoHealthLeft.Invoke(); // Invoke onNoHealthLeft event to disable health bar
+                onDied.Invoke(); // Trigger all the functions in onDied UnityEvent (e.g audio sound etc.)
                 Die();
-                RewardExperience(sourceofDamage);
+                RewardExperience(sourceOfDamage);
             }
             else
             {
-                takeDamage.Invoke(damage);
+                onHealthUpdated.Invoke(); // Invoke onNoHealthLeft event to update health bar
+                takeDamage.Invoke(damage); // Trigger all the functions in takeDamage UnityEvent (e.g spawn damage text etc.)
             }
         }
 
@@ -92,12 +104,18 @@ namespace RPG.Attributes
 
         private void Die()
         {
+            // If target health is already dead, do nothing
             if (hasDied) return;
 
             hasDied = true;
+
+            // Trigger death animation
             GetComponent<Animator>().SetTrigger("die");
+
+            // Cancel any action (Fighter, Mover etc) that has been set 
             GetComponent<ActionScheduler>().CancelCurrentAction();
         }
+        
         private void RewardExperience(GameObject sourceOfDamage)
         {
             Experience experience = sourceOfDamage.GetComponent<Experience>();
@@ -110,11 +128,13 @@ namespace RPG.Attributes
         {
             float regenHealthPoints = GetComponent<BaseStats>().GetStat(Stat.Health) * (regenerationPercentage / 100);
             healthPoints.value = Mathf.Max(healthPoints.value, regenHealthPoints);
+            onHealthUpdated.Invoke();
         }
 
         public void Heal(float healthToRestore)
         {
              healthPoints.value = Mathf.Min(healthPoints.value + healthToRestore, GetMaxHealth());
+             onHealthUpdated.Invoke();
         }
 
         public object CaptureState()
@@ -130,6 +150,8 @@ namespace RPG.Attributes
             {
                 Die();
             }
+
+            onHealthUpdated.Invoke();
         }
     }
 }

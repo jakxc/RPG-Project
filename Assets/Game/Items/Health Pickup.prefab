@@ -97,6 +97,10 @@ PrefabInstance:
       value: Health Pickup
       objectReference: {fileID: 0}
     - target: {fileID: 5476095732601064962, guid: 5481ea96e6697714eb9cb02214a52de5, type: 3}
+      propertyPath: weapon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476095732601064962, guid: 5481ea96e6697714eb9cb02214a52de5, type: 3}
       propertyPath: healthToRestore
       value: 20
       objectReference: {fileID: 0}

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace RPG.Saving
 {
-    [System.Serializable]
+    [System.Serializable] // This class is used to ensure a Vector3 can be converted to binary (Unity does not serialize Vector3 type)
     public class SerializableVector3
     {
         float x, y, z;
