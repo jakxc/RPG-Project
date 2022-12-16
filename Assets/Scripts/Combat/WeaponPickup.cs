@@ -57,7 +57,7 @@ namespace RPG.Combat
         {
             if (Input.GetMouseButton(0))
             {
-                controller.GetComponent<Interactor>().Collect(gameObject);
+                controller.GetComponent<Interactor>().Interact(gameObject);
             }
             return true;
         }

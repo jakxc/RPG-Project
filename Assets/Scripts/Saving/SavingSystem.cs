@@ -24,7 +24,7 @@ namespace RPG.Saving
         public void Save(string saveFile)
         {
             Dictionary<string, object> state = LoadFile(saveFile); // Load original state 
-            CaptureState(state); // Add the state to the deserialized saveFile
+            CaptureState(state); // Add the state to the deserialized saveFile, merges all the states
             SaveFile(saveFile, state);
         }
 
@@ -48,6 +48,7 @@ namespace RPG.Saving
             using (FileStream stream = File.Open(path, FileMode.Open)) // Open the file at path
             {
                 BinaryFormatter formatter = new BinaryFormatter();
+                
                 /*Casts deserialized file to Dictionary<string, object> type with key as UUID 
                 and value as type of data saved (e.g strings, floats etc)*/
                 return (Dictionary<string, object>)formatter.Deserialize(stream); 
@@ -58,7 +59,9 @@ namespace RPG.Saving
         {
             string path = GetPathFromSaveFile(saveFile);
             print("Saving to " + path);
-            // using statement allows FileStream to be closed once it is exited (all code within is run)
+            
+            /*using statement allows FileStream to be closed once it is exited (all code within is run)
+            A FileStream is where binary bits can be read/write to*/
             using (FileStream stream = File.Open(path, FileMode.Create)) // Create new file to path, overwrites if file already exists
             {
                 BinaryFormatter formatter = new BinaryFormatter();

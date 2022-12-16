@@ -9,41 +9,42 @@ namespace RPG.Control
     // Only used for Weapon pick ups at the moment...
     public class Interactor : MonoBehaviour, IAction
     {
+        [SerializeField] float interactRange = 1f;
+        private Mover mover;
         private WeaponPickup target = null;
+
+        private void Awake() 
+        {
+            mover = GetComponent<Mover>();
+        }
 
         private void Update()
         {
-            if (target == null) { return; }
+            if (target == null) return;
 
             if (!GetIsInRange())
             {
-                MoveToPosition(target.transform.position);
+                mover.MoveTo(target.transform.position, 1f);
             }
             else
             {
-                GetComponent<Mover>().Cancel();
-                CollectBehaviour();
+                mover.Cancel();
+                InteractBehaviour();
             }
         }
 
-        public void MoveToPosition(Vector3 movePosition)
-        {
-            GetComponent<Mover>().MoveTo(movePosition, 1f);
-        }
-
-
-        public void Collect(GameObject collectTarget)
+        public void Interact(GameObject interactable)
         {
             GetComponent<ActionScheduler>().StartAction(this);
-            target = collectTarget.GetComponent<WeaponPickup>();
+            target = interactable.GetComponent<WeaponPickup>();
         }
 
         private bool GetIsInRange()
         {
-            return Vector3.Distance(transform.position, target.transform.position) < 1f;
+            return Vector3.Distance(transform.position, target.transform.position) < interactRange;
         }
 
-        private void CollectBehaviour()
+        private void InteractBehaviour()
         {
             // TODO: Add animation
         }
@@ -52,7 +53,7 @@ namespace RPG.Control
         public void Cancel()
         {
             StopAttack();
-            GetComponent<Mover>().Cancel();
+            mover.Cancel();
             target = null;
         }
 

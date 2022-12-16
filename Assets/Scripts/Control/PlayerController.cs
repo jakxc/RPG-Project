@@ -50,8 +50,8 @@ namespace RPG.Control
 
             foreach (RaycastHit hit in hits)
             {
-                /*Get all IRaycastable that is hit and perform the action in HandleRaycast().
-                Set the cursor type to the cursor type set in IRaycastables*/
+                /*Get all IRaycastable that is hit and call HandleRaycast() from thet specific
+                IRaycastable hit. Set the cursor type to the cursor type specified in IRaycastables*/
                 IRaycastable[] raycastables = hit.transform.GetComponents<IRaycastable>();
                 foreach (IRaycastable raycastable in raycastables)
                 {
@@ -85,7 +85,8 @@ namespace RPG.Control
         } 
         
         private bool InteractWithUI()
-        {
+        {   
+            // Returns true if cursor is over UI
             if (EventSystem.current.IsPointerOverGameObject())
             {
                 SetCursor(CursorType.UI);
@@ -104,6 +105,7 @@ namespace RPG.Control
                 if(!GetComponent<Mover>().CanMoveTo(target)) return false;
                 if (Input.GetMouseButton(0))
                 {
+                    // If can move to and input is right mouse button, move to target at 1x base speed
                     GetComponent<Mover>().StartMoveAction(target, 1f);
                 }
                 SetCursor(CursorType.Movement);
@@ -113,23 +115,25 @@ namespace RPG.Control
             return false;
         }
 
+        // This method is used to toggle whether the cursor is over NavMesh
         private bool RaycastNavMesh(out Vector3 target)
         {
             target = new Vector3();
             RaycastHit hit;
+            //  Returns true when the ray intersects any collider, otherwise false. 
             bool hasHit = Physics.Raycast(GetMouseRay(), out hit);
             if(!hasHit) return false;
             
-            NavMeshHit navMashHit;
+            NavMeshHit navMeshHit;
             
-            /*SamplePosition finds the nearest point based on the NavMesh within a specified range.
+            /* SamplePosition finds the nearest point based on the NavMesh (terrain etc) within a specified range.
             In this case, it will return false if this is not within maxNavMeshProjectionDistance 
             from hit.point */
             bool hasCastToNavMesh = NavMesh.SamplePosition(
-                hit.point, out navMashHit, maxNavMeshProjectionDistance, NavMesh.AllAreas);
+                hit.point, out navMeshHit, maxNavMeshProjectionDistance, NavMesh.AllAreas);
             if (!hasCastToNavMesh) return false;
 
-            target = navMashHit.position; // Position on the NavMesh that has been cast to (hit)
+            target = navMeshHit.position; // Position on the NavMesh that has been cast to (hit)
 
             return true;
         }
@@ -141,12 +145,16 @@ namespace RPG.Control
 
         private void SetCursor(CursorType type)
         {
+            // Find CursorMapping that has matching CursorType as type in the cursorMappings array 
             CursorMapping mapping = GetCursorMapping(type);
+            // and set the cursor to that type 
             Cursor.SetCursor(mapping.texture, mapping.hotspot, CursorMode.Auto);
         }
 
         private CursorMapping GetCursorMapping(CursorType type)
         {
+            /* For each element in cursorMappings, if the element has matching type, return 
+            the mapping. Otherwise, return the first element (CursorType.None) */
             foreach (CursorMapping mapping in cursorMappings)
             {
                 if (mapping.type == type)

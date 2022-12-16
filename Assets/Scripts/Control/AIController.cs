@@ -18,7 +18,6 @@ namespace RPG.Control
         
         [Header("Inactive Behaviour")]
         [SerializeField] float waypointTolerance = 1f; // Max distance between this and waypoint before it can be considered arrived at waypoint
-        float waypointDwellTime;
         [SerializeField] float minDwellTime = 1f;
         [SerializeField] float maxDwellTime = 5f;
 
@@ -107,7 +106,7 @@ namespace RPG.Control
         // Default bahaviour is moving on set path defined by certain waypoints
         private void DefaultBehaviour()
         {
-            // AI will already return to default position when it is not attacking or suspicious
+            // This will already return to default position when it is not attacking or suspicious
             Vector3 nextPosition = defaultPosition.value;
             
             if (aiPath != null)
@@ -128,8 +127,7 @@ namespace RPG.Control
 
             /*Randomly generate dwell time between min and max dwell time. If this has stayed at
              current waypoint for longer than dwell time, starting moving to next waypoint*/
-            GenerateRandomDwellTime();
-            if (timeSinceArrivedAtWaypoint > waypointDwellTime)
+            if (timeSinceArrivedAtWaypoint > GenerateRandomDwellTime())
             {
                 mover.StartMoveAction(nextPosition, defaultSpeedFraction);
             }
@@ -156,9 +154,9 @@ namespace RPG.Control
             currentWaypointIndex = aiPath.GetNextIndex(currentWaypointIndex);
         }
 
-        private void GenerateRandomDwellTime()
+        private float GenerateRandomDwellTime()
         {
-            waypointDwellTime = UnityEngine.Random.Range(minDwellTime, maxDwellTime);
+            return UnityEngine.Random.Range(minDwellTime, maxDwellTime);
         }
 
         private void SuspicionBehaviour()
@@ -168,7 +166,7 @@ namespace RPG.Control
 
         private void AttackBehaviour()
         {
-            timeSinceLastSawPlayer = 0;
+            timeSinceLastSawPlayer = 0f;
             fighter.Attack(player);
 
             AggrevateNearbyUnits();

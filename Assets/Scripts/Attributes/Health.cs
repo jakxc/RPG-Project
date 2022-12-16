@@ -15,7 +15,7 @@ namespace RPG.Attributes
         [SerializeField] TakeDamageEvent takeDamage;
         [SerializeField] UnityEvent onDied;
 
-        /* This is used because cannot Unity cannot serialize UnityEvent<float> (classes with chevrons). Select Dynamic float in
+        /* Subclass used because cannot Unity cannot serialize UnityEvent<float> (classes with chevrons). Select Dynamic float in
         Unity Editor to allow the float passed into this event to be used in functions triggered by 
         this event*/ 
         [System.Serializable]
@@ -78,7 +78,10 @@ namespace RPG.Attributes
             else
             {
                 onHealthUpdated.Invoke(); // Invoke onNoHealthLeft event to update health bar
-                takeDamage.Invoke(damage); // Trigger all the functions in takeDamage UnityEvent (e.g spawn damage text etc.)
+                /* Trigger all the functions in takeDamage UnityEvent (e.g spawn damage text etc.).
+                The damage float is passed in as arg so DamageTextSpawner can use the correct damage value
+                to spawn as text*/
+                takeDamage.Invoke(damage); 
             }
         }
 
@@ -150,8 +153,6 @@ namespace RPG.Attributes
             {
                 Die();
             }
-
-            onHealthUpdated.Invoke();
         }
     }
 }

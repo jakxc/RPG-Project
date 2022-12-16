@@ -74,10 +74,11 @@ namespace RPG.Movement {
         private float GetPathLength(NavMeshPath path)
         {
             float total = 0f;
+            // If less than 2 corners in path, return 0 length since there is only a single point in the path
             if (path.corners.Length < 2) return total;
 
-            /*Add the distance of all path corner pairs in order from first index to last.
-            This will give total distance of path*/
+            /* Add the distance of all path corner pairs in order from first index to last.
+            This will give total distance of path */
             for (int i = 0; i < path.corners.Length - 1; i++)
             {
                 total += Vector3.Distance(path.corners[i], path.corners[i + 1]);

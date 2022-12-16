@@ -14,6 +14,7 @@ namespace RPG.Saving
             z = vector.z;
         }
 
+        // Changes SerializableVector3 type to Vector3
         public Vector3 ToVector()
         {
             return new Vector3(x, y, z);

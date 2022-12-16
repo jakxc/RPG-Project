@@ -16,6 +16,7 @@ namespace RPG.Combat
         [SerializeField] Transform leftHandTransform = null;
         [SerializeField] WeaponConfig defaultWeapon = null;
         float timeSinceLastAttack = Mathf.Infinity;
+        bool inCombat;
         Health target;
         Mover mover;
         WeaponConfig currentWeaponConfig;

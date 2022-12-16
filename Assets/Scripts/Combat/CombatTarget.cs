@@ -21,7 +21,7 @@ namespace RPG.Combat
                 return false;
             }
 
-            // If user clicks on CombatTarget, player attack this CombatTarget
+            // If left mouse button is clicked on CombatTarget, player attack this CombatTarget
             if (Input.GetMouseButton(0))
             {
                 controller.GetComponent<Fighter>().Attack(gameObject);

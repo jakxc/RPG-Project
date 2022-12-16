@@ -44,17 +44,11 @@ namespace RPG.SceneManagement
             return Fade(0, time);
         }
 
-        private IEnumerator FadeOutIn()
-        {
-            yield return FadeOut(3f);
-            yield return FadeIn(1f);
-        }
-
-        private IEnumerator FadeRoutine(float target, float time)
+          private IEnumerator FadeRoutine(float target, float time)
         {   
-            /*While alpha value of canvas group has not reached the set target value, 
-            continue to move alpha by (1 * Time.deltaTime / time) amount until it reaches target.
-            The amount alpha needs to move to get from 0 to 1 is (1 * Time.deltaTime / time)*/
+            /* While alpha value of canvas group has not reached the set target value, 
+            continue to move alpha by 1 * (Time.deltaTime / time) each frame until it reaches target.
+            The amount alpha needs to move to get from 0 to 1 is 1 * (Time.deltaTime / time)*/
             while (!Mathf.Approximately(canvasGroup.alpha, target))
             {
                 canvasGroup.alpha = Mathf.MoveTowards(canvasGroup.alpha, target, Time.deltaTime / time);

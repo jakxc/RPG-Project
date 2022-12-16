@@ -46,8 +46,8 @@ namespace RPG.SceneManagement
             /* Disable PlayerController so player cannot move while entering portal, this prevents player from entering 
             another portal which could cause a coroutine race condition*/
             playerController.enabled = false; 
-            yield return fader.FadeOut(fadeOutTime); // Start fade out transition (alpha of fader moves to 0)
-            
+            yield return fader.FadeOut(fadeOutTime); // Yield return fade out to ensure Fader completes fade out before any further code is run
+           
             wrapper.Save(); // Save the state of game in current scene (e.g enemies health, position etc)
 
             yield return SceneManager.LoadSceneAsync(sceneToLoad); // Load new scene 
@@ -62,7 +62,7 @@ namespace RPG.SceneManagement
             wrapper.Save(); // Save the state of game automatically when exiting portal into new scene so 
 
             yield return new WaitForSeconds(fadeWaitTime); // Wait for fadeWaitTime before fade in
-            fader.FadeIn(fadeInTime);
+            fader.FadeIn(fadeInTime); // Do not yield return fade in so player controller is enabled while fading in (player can move around while fading in etc.)
 
             newPlayerController.enabled = true;
             Destroy(gameObject); // Destroy enter portal (portal from old scene is no longer needed and will be instantiated as PersistantObjectPrefab)
