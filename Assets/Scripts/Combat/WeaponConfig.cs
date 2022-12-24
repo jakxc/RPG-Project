@@ -15,7 +15,7 @@ namespace RPG.Combat
         [SerializeField] bool isRightHanded = true;
         [SerializeField] Projectile projectile = null;
         [SerializeField] AnimatorOverrideController animatorOverride = null; // Animator controller specific to weapon equipped
-        [SerializeField] Weapon equipPrefab = null;
+        [SerializeField] Weapon weaponPrefab = null;
 
         const string weaponName = "Weapon";
 
@@ -25,10 +25,10 @@ namespace RPG.Combat
             
             Weapon weapon = null;
 
-            if (equipPrefab != null)
+            if (weaponPrefab != null)
             {
                 Transform handTransform = GetTransform(rightHand, leftHand); // Determines if weapon is equip on right or left hand
-                weapon = Instantiate(equipPrefab, handTransform);
+                weapon = Instantiate(weaponPrefab, handTransform);
                 weapon.gameObject.name = weaponName; // Set weaponName to WeaponConfig name for saving/loading purposes
             }
 
@@ -39,8 +39,9 @@ namespace RPG.Combat
             {
                 anim.runtimeAnimatorController = animatorOverride; // If there is animator override for weapon, set it as runtime animator controller
             }
-            /*If the weapon does not have animator override set, set animator controller as default animator controller.
-            This prevents this from using previous WeaponConfig animator override controller (e.g fireball using sword animation) */
+            /* If the weapon does not have animator override set, set animator controller as default animator controller.
+            This prevents this from using previous WeaponConfig animator override controller 
+            (e.g fireball using sword animation) */
             else if (overrideController != null) 
             {
                 anim.runtimeAnimatorController = overrideController.runtimeAnimatorController;

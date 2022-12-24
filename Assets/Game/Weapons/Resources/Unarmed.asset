@@ -18,4 +18,4 @@ MonoBehaviour:
   isRightHanded: 1
   projectile: {fileID: 0}
   animatorOverride: {fileID: 0}
-  equipPrefab: {fileID: -8996187112876612055, guid: 865b1a100632e8b4f846145341809f83, type: 3}
+  weaponPrefab: {fileID: -8996187112876612055, guid: 865b1a100632e8b4f846145341809f83, type: 3}

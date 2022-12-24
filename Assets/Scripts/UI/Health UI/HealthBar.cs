@@ -1,3 +1,4 @@
+using RPG.Combat;
 using RPG.Attributes;
 using UnityEngine;
 
@@ -8,11 +9,23 @@ namespace RPG.UI.HealthUI
         [SerializeField] Health health = null;
         [SerializeField] RectTransform foreground = null;
         [SerializeField] Canvas rootCanvas = null;
+
+        Fighter fighter;
         
+        private void Awake() 
+        {
+            fighter = GetComponent<Fighter>();
+        }
+
         private void OnEnable()    
         {
-              health.onHealthUpdated += UpdateHealthBar;
-              health.onNoHealthLeft += DisableHealthBar;
+            health.onHealthUpdated += UpdateHealthBar;
+            health.onNoHealthLeft += DisableHealthBar;
+             
+            if (fighter != null) 
+            {
+                fighter.onNotInCombat += DisableHealthBar;
+            }
         }
 
         private void OnDisable()    

@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 6
+  maxPathLength: 40
 --- !u!114 &5423248485959957397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,7 +270,9 @@ MonoBehaviour:
   shouldUseModifiers: 0
   characterClass: 1
   progression: {fileID: 11400000, guid: 27856dbce6578ee45a7f955d37779b8b, type: 2}
-  levelUpParticleEffect: {fileID: 0}
+  onLeveledUp:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3901959300486319432
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,6 +617,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Health Bar
       objectReference: {fileID: 0}
+    - target: {fileID: 5359203579696661992, guid: 01eba509f446f364fa3d682634a7d954, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 9185156740932612024, guid: 01eba509f446f364fa3d682634a7d954, type: 3}
       propertyPath: health
       value: 
@@ -678,7 +685,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8192618896180188686, guid: 91b2c360dcad17a4c9cfbf0c8b3fc8cc, type: 3}
       propertyPath: m_Name
-      value: DamageTextSpawner
+      value: DisplayTextSpawner
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91b2c360dcad17a4c9cfbf0c8b3fc8cc, type: 3}

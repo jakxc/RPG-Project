@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1110789111692462539}
   - component: {fileID: 4207632962486182163}
   m_Layer: 0
-  m_Name: Damage Text Spawner
+  m_Name: Display Text Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9480927f5d9c6d64484c9abce304ae84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageTextPrefab: {fileID: -5650579384633585068, guid: 30e9e0c0ad141da4eae9aba807bfd792, type: 3}
+  displayTextPrefab: {fileID: 6494245201911276926, guid: 43a2e9ab8a5bf3742aa32a1809cf481a, type: 3}

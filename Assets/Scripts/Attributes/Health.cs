@@ -49,12 +49,12 @@ namespace RPG.Attributes
 
         private void OnEnable() 
         {
-            GetComponent<BaseStats>().onLevelUp += RegenerateHealth; // Subscribe to onLevelUp event in OnEnable  
+            GetComponent<BaseStats>().onLevelUpdated += RegenerateHealth; // Subscribe to onLevelUp event in OnEnable  
         }
 
         private void OnDisable() 
         {
-            GetComponent<BaseStats>().onLevelUp -= RegenerateHealth;  // Unsubscribe to onLevelUp event in OnDisable  
+            GetComponent<BaseStats>().onLevelUpdated -= RegenerateHealth;  // Unsubscribe to onLevelUp event in OnDisable  
         }
 
         public bool IsDead()

@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 485416813793149106, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: m_Name
+      value: Display Text Spawner
+      objectReference: {fileID: 0}
     - target: {fileID: 597572161803505107, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
       propertyPath: level
       value: 3
@@ -27,6 +31,38 @@ PrefabInstance:
       propertyPath: levelUpParticleEffect
       value: 
       objectReference: {fileID: 861678867403718971, guid: 0cbf0c5b1dd389f4fbdcced51609e755, type: 3}
+    - target: {fileID: 597572161803505107, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: onLeveledUp.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 597572161803505107, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: onLeveledUp.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 597572161803505107, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: onLeveledUp.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 889105689385273035}
+    - target: {fileID: 597572161803505107, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: onLeveledUp.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 597572161803505107, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: onLeveledUp.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SpawnDisplayString
+      objectReference: {fileID: 0}
+    - target: {fileID: 597572161803505107, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: onLeveledUp.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: RPG.UI.DisplayText.DisplayTextSpawner, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 597572161803505107, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: onLeveledUp.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Level Up!
+      objectReference: {fileID: 0}
+    - target: {fileID: 597572161803505107, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: onLeveledUp.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 652599562308910438, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -79,6 +115,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2062763289511347706, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SpawnDisplayNumber
+      objectReference: {fileID: 0}
+    - target: {fileID: 2062763289511347706, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: RPG.UI.DisplayText.DisplayTextSpawner, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 2201472614911438265, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
       propertyPath: uniqueIdentifier
       value: player
@@ -123,6 +167,18 @@ PrefabInstance:
       propertyPath: rightHandTransform
       value: 
       objectReference: {fileID: 7749840432429312901}
+    - target: {fileID: 5578280559239182255, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: displayTextPrefab
+      value: 
+      objectReference: {fileID: 6494245201911276926, guid: 43a2e9ab8a5bf3742aa32a1809cf481a, type: 3}
+    - target: {fileID: 5578280559239182255, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: levelUpTextPrefab
+      value: 
+      objectReference: {fileID: 6328590607246631494, guid: 81cbc979470f394458914e4f0339f274, type: 3}
+    - target: {fileID: 6071174249516035682, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6182378445021986676, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -131,12 +187,31 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6377181856148314881, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8675300331888877431, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8675300331888877431, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+--- !u!114 &889105689385273035 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5578280559239182255, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+  m_PrefabInstance: {fileID: 4700830525562925412}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9480927f5d9c6d64484c9abce304ae84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5202444462827162626 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 652599562308910438, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
@@ -186,6 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06be7c255b1a2964fb17da94228fcd31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactRange: 1
 --- !u!114 &7832433789577301362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,7 +305,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2457768577186542868, guid: 831654dbd3bbdff45a087fa79b7c2506, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2457768577186542868, guid: 831654dbd3bbdff45a087fa79b7c2506, type: 3}
       propertyPath: m_LocalPosition.x

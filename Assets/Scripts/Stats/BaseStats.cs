@@ -1,6 +1,7 @@
 using System;
 using GameDevTV.Utils;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace RPG.Stats
 {
@@ -10,9 +11,9 @@ namespace RPG.Stats
         [SerializeField] bool shouldUseModifiers = false;
         [SerializeField] CharacterClass characterClass;
         [SerializeField] Progression progression = null; 
-        [SerializeField] GameObject levelUpParticleEffect = null;
+        [SerializeField] UnityEvent onLevelUp;
         Experience experience; 
-        public event Action onLevelUp; 
+        public event Action onLevelUpdated; 
         LazyValue<int> currentLevel;
         
         private void Awake() 
@@ -48,14 +49,9 @@ namespace RPG.Stats
             if (newLevel > currentLevel.value)
             {
                 currentLevel.value = newLevel;
-                LevelUpEffect();
-                onLevelUp();
+                onLevelUp.Invoke();
+                onLevelUpdated();
             }
-        }
-
-        private void LevelUpEffect()
-        {
-            Instantiate(levelUpParticleEffect, transform);
         }
 
         public float GetStat(Stat stat)

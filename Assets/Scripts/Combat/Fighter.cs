@@ -6,21 +6,28 @@ using RPG.Movement;
 using UnityEngine;
 using System.Collections.Generic;
 using GameDevTV.Utils;
+using System;
 
 namespace RPG.Combat
 {
     public class Fighter : MonoBehaviour, IAction, ISaveable, IModifierProvider
     {
         [SerializeField] float timeBetweenAttacks = 1f;
+        [SerializeField] float timeToIndicateNotInCombat = 8f; // Used to disable healthbar outside of combat
         [SerializeField] Transform rightHandTransform = null;
         [SerializeField] Transform leftHandTransform = null;
         [SerializeField] WeaponConfig defaultWeapon = null;
         float timeSinceLastAttack = Mathf.Infinity;
-        bool inCombat;
+        float timeOutOfCombat = Mathf.Infinity;
         Health target;
         Mover mover;
         WeaponConfig currentWeaponConfig;
-        LazyValue<Weapon> currentWeapon;
+        /* If currentWeapon value has not been assign the first time it is read, then the Initializer is called.
+         If, however, the value is assigned before the initializer is called, then there is no need to 
+        call the Initializer. This prevents race conditions where values can be overwritten or null when
+        it is accessed */
+        LazyValue<Weapon> currentWeapon; 
+        public event Action onNotInCombat;
 
         private void Awake() 
         {
@@ -42,10 +49,16 @@ namespace RPG.Combat
         private void Update() 
         {
             timeSinceLastAttack += Time.deltaTime;
+            timeOutOfCombat += Time.deltaTime;
             
             // If target is null or dead, do nothing
             if (target == null) return;
             if (target.IsDead()) return; 
+
+            // if (timeOutOfCombat > timeToIndicateNotInCombat)
+            // {
+            //     onNotInCombat.Invoke();
+            // }
 
             // If target is out of weapon range, move to target
             if (!GetIsInRange(target.transform))
@@ -79,6 +92,9 @@ namespace RPG.Combat
 
         void AttackBehaviour()
         {
+            // Reset time out of combat
+            timeOutOfCombat = 0f;
+            
             transform.LookAt(target.transform);
             
             // Only trigger attack if time since last attack reached cooldown
@@ -150,6 +166,11 @@ namespace RPG.Combat
             /*If target is not null and not dead (and can move to/is in range), then can attack 
             the target*/
             return target != null && !target.IsDead();
+        }
+
+        public float GetTimeOutOfCombat()
+        {
+            return timeOutOfCombat;
         }
 
         /* Does not take in CombatTarget type as arg because both player and AI controller
