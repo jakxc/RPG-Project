@@ -14,18 +14,14 @@ namespace RPG.UI.HealthUI
         
         private void Awake() 
         {
-            fighter = GetComponent<Fighter>();
+            fighter = GetComponentInParent<Fighter>();
         }
 
         private void OnEnable()    
         {
             health.onHealthUpdated += UpdateHealthBar;
             health.onNoHealthLeft += DisableHealthBar;
-             
-            if (fighter != null) 
-            {
-                fighter.onNotInCombat += DisableHealthBar;
-            }
+            fighter.onNotInCombat += DisableHealthBar;
         }
 
         private void OnDisable()    

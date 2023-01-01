@@ -1,6 +1,6 @@
 using RPG.Core;
 using RPG.Stats;
-using RPG.Saving;
+using GameDevTV.Saving;
 using RPG.Attributes;
 using RPG.Movement;
 using UnityEngine;
@@ -55,10 +55,10 @@ namespace RPG.Combat
             if (target == null) return;
             if (target.IsDead()) return; 
 
-            // if (timeOutOfCombat > timeToIndicateNotInCombat)
-            // {
-            //     onNotInCombat.Invoke();
-            // }
+            if (timeOutOfCombat > timeToIndicateNotInCombat)
+            {
+                onNotInCombat.Invoke();
+            }
 
             // If target is out of weapon range, move to target
             if (!GetIsInRange(target.transform))
