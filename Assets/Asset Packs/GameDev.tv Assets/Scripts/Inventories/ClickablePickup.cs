@@ -36,18 +36,10 @@ namespace RPG.Control
             }
         }
 
-        public bool HandleRaycast(PlayerController callingController)
+        public bool HandleRaycast(PlayerController controller)
         {
-            print("hovering on clickable pickup " + name);
             if (Input.GetMouseButtonDown(0))
             {
-                DedideOnPickupMethod(callingController);
-            }
-            return true;
-        }
-
-        private void DedideOnPickupMethod(PlayerController controller)
-        {
             if (isRunoverPickup)
             {
                 print("this is a runover pickup... be right there!");
@@ -57,6 +49,8 @@ namespace RPG.Control
             {
                 pickup.PickupItem();
             }
-        }   
-    }
+            }
+            return true;
+        }
+     }
 }

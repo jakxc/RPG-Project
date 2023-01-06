@@ -3,6 +3,7 @@ using UnityEngine;
 using RPG.Core;
 using RPG.Combat;
 using RPG.Movement;
+using GameDevTV.Inventories;
 
 namespace RPG.Control
 {
@@ -11,7 +12,7 @@ namespace RPG.Control
     {
         [SerializeField] float interactRange = 1f;
         private Mover mover;
-        private WeaponPickup target = null;
+        private Pickup target = null;
 
         private void Awake() 
         {
@@ -36,7 +37,7 @@ namespace RPG.Control
         public void Interact(GameObject interactable)
         {
             GetComponent<ActionScheduler>().StartAction(this);
-            target = interactable.GetComponent<WeaponPickup>();
+            target = interactable.GetComponent<Pickup>();
         }
 
         private bool GetIsInRange()

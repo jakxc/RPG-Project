@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using GameDevTV.Inventories;
 using RPG.Attributes;
+using RPG.Stats;
 using UnityEngine;
 
 namespace RPG.Combat
 {
     [CreateAssetMenu(fileName = "Weapon", menuName = "Weapons/Make New Weapon", order = 0)]
-    public class WeaponConfig : EquipableItem
+    public class WeaponConfig : EquipableItem, IModifierProvider
     {
         [SerializeField] float weaponDamage = 5f;
         [SerializeField] float percentageBonus = 0f; // % bonus that will be added to base damage when equipped 
@@ -97,6 +98,22 @@ namespace RPG.Combat
         {
             Projectile projectileInstance = Instantiate(projectile, GetTransform(rightHand, leftHand).position, Quaternion.identity);
             projectileInstance.SetTarget(target, calculatedDamage, sourceOfDamage);
+        }
+
+        public IEnumerable<float> GetAdditiveModifiers(Stat stat)
+        {
+            if (stat == Stat.Damage)
+            {
+                yield return weaponDamage;
+            }
+        }
+
+        public IEnumerable<float> GetPercentageModifiers(Stat stat)
+        {
+             if (stat == Stat.Damage)
+            {
+                yield return percentageBonus;
+            }
         }
     }
 }

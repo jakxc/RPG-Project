@@ -148,9 +148,21 @@ PrefabInstance:
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2062763289511347706, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: onDied.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2062763289511347706, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
       propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.size
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2062763289511347706, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: onDied.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2062763289511347706, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: onDied.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 4327577904196834487}
     - target: {fileID: 2062763289511347706, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
       propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 0
@@ -158,6 +170,14 @@ PrefabInstance:
     - target: {fileID: 2062763289511347706, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
       propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2062763289511347706, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: onDied.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2062763289511347706, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: onDied.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: RandomDrop
       objectReference: {fileID: 0}
     - target: {fileID: 2062763289511347706, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
       propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[2].m_Target
@@ -176,12 +196,20 @@ PrefabInstance:
       value: Aggrevate
       objectReference: {fileID: 0}
     - target: {fileID: 2062763289511347706, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: onDied.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: RPG.Inventory.RandomDropper, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2062763289511347706, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
       propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: RPG.UI.DisplayText.DisplayTextSpawner, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2062763289511347706, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
       propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
       value: RPG.Control.AIController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2062763289511347706, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
+      propertyPath: onDied.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2062763289511347706, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
       propertyPath: takeDamage.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -217,7 +245,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6182378445021986676, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6182378445021986676, guid: f037b8a6f6a25054fb9098bcb6e6726f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -295,3 +323,18 @@ MonoBehaviour:
   maxDwellTime: 8
   defaultSpeedFraction: 0.25
   aiPath: {fileID: 0}
+--- !u!114 &4327577904196834487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8148735532772928953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37f6028f0fab1494ab3bff1d417aca70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scatterDistance: 1
+  dropLibrary: {fileID: 11400000, guid: b5b16d51ac3df53459b2fdc6886cfe98, type: 2}
+  numberOfDrops: 1
