@@ -15,10 +15,10 @@ namespace GameDevTV.UI.Inventories
     /// </summary>
     public class InventoryDropTarget : MonoBehaviour, IDragDestination<InventoryItem>
     {
-        public void AddItems(InventoryItem item, int number)
+        public void AddItems(InventoryItem item, int quantity)
         {
-            var player = GameObject.FindGameObjectWithTag("Player");
-            player.GetComponent<ItemDropper>().DropItem(item, number);
+            var player = GameObject.FindGameObjectWithTag("Player"); // To ensure the ItemDropper is from the player (i.e. the one that dropped the item from inventory is the player)
+            player.GetComponent<ItemDropper>().DropItem(item, quantity);
         }
 
         public int MaxAcceptable(InventoryItem item)

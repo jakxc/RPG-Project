@@ -22,7 +22,7 @@ namespace GameDevTV.Inventories
         public struct InventorySlot
         {
             public InventoryItem item;
-            public int number;
+            public int quantity;
         }
 
         // PUBLIC
@@ -61,9 +61,9 @@ namespace GameDevTV.Inventories
         /// Attempt to add the items to the first available slot.
         /// </summary>
         /// <param name="item">The item to add.</param>
-        /// <param name="number">The number to add.</param>
+        /// <param name="quantity">The number to add.</param>
         /// <returns>Whether or not the item could be added.</returns>
-        public bool AddToFirstEmptySlot(InventoryItem item, int number)
+        public bool AddToFirstEmptySlot(InventoryItem item, int quantity)
         {
             int i = FindSlot(item);
 
@@ -73,7 +73,7 @@ namespace GameDevTV.Inventories
             }
 
             slots[i].item = item;
-            slots[i].number += number;
+            slots[i].quantity += quantity;
             if (inventoryUpdated != null)
             {
                 inventoryUpdated();
@@ -99,30 +99,31 @@ namespace GameDevTV.Inventories
         /// <summary>
         /// Return the item type in the given slot.
         /// </summary>
-        public InventoryItem GetItemInSlot(int slot)
+        public InventoryItem GetItemInSlot(int index)
         {
-            return slots[slot].item;
+            return slots[index].item;
         }
 
         /// <summary>
-        /// Get the number of items in the given slot.
+        /// Get the quantity of items in the given slot.
         /// </summary>
-        public int GetNumberInSlot(int slot)
+        public int GetQuantityInSlot(int index)
         {
-            return slots[slot].number;
+            return slots[index].quantity;
         }
 
         /// <summary>
         /// Remove a number of items from the given slot. Will never remove more
         /// that there are.
         /// </summary>
-        public void RemoveFromSlot(int slot, int number)
+        public void RemoveFromSlot(int index, int quantity)
         {
-            slots[slot].number -= number;
-            if (slots[slot].number <= 0)
+            slots[index].quantity -= quantity;
+            // If quantity of item in slow is equal or less than 0, set item to null and quantity to 0
+            if (slots[index].quantity <= 0)
             {
-                slots[slot].number = 0;
-                slots[slot].item = null;
+                slots[index].quantity = 0;
+                slots[index].item = null;
             }
             if (inventoryUpdated != null)
             {
@@ -135,25 +136,25 @@ namespace GameDevTV.Inventories
         /// a stack of this type, it will add to the existing stack. Otherwise,
         /// it will be added to the first empty slot.
         /// </summary>
-        /// <param name="slot">The slot to attempt to add to.</param>
+        /// <param name="index">The slot to attempt to add to.</param>
         /// <param name="item">The item type to add.</param>
-        /// <param name="number">The number of items to add.</param>
+        /// <param name="quantity">The number of items to add.</param>
         /// <returns>True if the item was added anywhere in the inventory.</returns>
-        public bool AddItemToSlot(int slot, InventoryItem item, int number)
+        public bool AddItemToSlot(int index, InventoryItem item, int quantity)
         {
-            if (slots[slot].item != null)
+            if (slots[index].item != null)
             {
-                return AddToFirstEmptySlot(item, number); ;
+                return AddToFirstEmptySlot(item, quantity); ;
             }
 
             var i = FindStack(item);
             if (i >= 0)
             {
-                slot = i;
+                index = i;
             }
 
-            slots[slot].item = item;
-            slots[slot].number += number;
+            slots[index].item = item;
+            slots[index].quantity += quantity;
             if (inventoryUpdated != null)
             {
                 inventoryUpdated();
@@ -171,14 +172,17 @@ namespace GameDevTV.Inventories
         /// <summary>
         /// Find a slot that can accomodate the given item.
         /// </summary>
-        /// <returns>-1 if no slot is found.</returns>
+        /// <returns>-1 if no slot is found. Else return the index of the slot with the item</returns>
         private int FindSlot(InventoryItem item)
         {
             int i = FindStack(item);
+            // If no slot is found that contains this item, find the empty slot with the lowest index
             if (i < 0)
             {
                 i = FindEmptySlot();
             }
+
+            // else return the index of the slot with the item/s in question
             return i;
         }
 
@@ -201,9 +205,12 @@ namespace GameDevTV.Inventories
         /// <summary>
         /// Find an existing stack of this item type.
         /// </summary>
-        /// <returns>-1 if no stack exists or if the item is not stackable.</returns>
+        ///<param name="item">The item in question</param>
+        /// <returns>-1 if no stack exists or if the item is not stackable. 
+        /// Returns index of slot the existing item is from if it is stackable</returns>
         private int FindStack(InventoryItem item)
         {
+            // If item is not stackable
             if (!item.IsStackable())
             {
                 return -1;
@@ -211,6 +218,7 @@ namespace GameDevTV.Inventories
 
             for (int i = 0; i < slots.Length; i++)
             {
+                // ReferenceEquals check if the item in the slot is exactly equal to the item in question
                 if (object.ReferenceEquals(slots[i].item, item))
                 {
                     return i;
@@ -220,10 +228,11 @@ namespace GameDevTV.Inventories
         }
 
         [System.Serializable]
+        // Does not use default InventorySLot struct because cannot serialize the reference to InventoryItem.
         private struct InventorySlotRecord
         {
-            public string itemID;
-            public int number;
+            public string itemID; 
+            public int quantity;
         }
     
         object ISaveable.CaptureState()
@@ -234,7 +243,7 @@ namespace GameDevTV.Inventories
                 if (slots[i].item != null)
                 {
                     slotStrings[i].itemID = slots[i].item.GetItemID();
-                    slotStrings[i].number = slots[i].number;
+                    slotStrings[i].quantity = slots[i].quantity;
                 }
             }
             return slotStrings;
@@ -246,7 +255,7 @@ namespace GameDevTV.Inventories
             for (int i = 0; i < inventorySize; i++)
             {
                 slots[i].item = InventoryItem.GetFromID(slotStrings[i].itemID);
-                slots[i].number = slotStrings[i].number;
+                slots[i].quantity = slotStrings[i].quantity;
             }
             if (inventoryUpdated != null)
             {

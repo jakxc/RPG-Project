@@ -37,7 +37,7 @@ namespace GameDevTV.UI.Inventories
             return store.GetAction(index);
         }
 
-        public int GetNumber()
+        public int GetQuantity()
         {
             return store.GetNumber(index);
         }
@@ -56,7 +56,7 @@ namespace GameDevTV.UI.Inventories
 
         void UpdateIcon()
         {
-            icon.SetItem(GetItem(), GetNumber());
+            icon.SetItem(GetItem(), GetQuantity());
         }
     }
 }

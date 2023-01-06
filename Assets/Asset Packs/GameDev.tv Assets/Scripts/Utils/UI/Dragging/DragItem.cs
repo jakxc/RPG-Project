@@ -34,7 +34,7 @@ namespace GameDevTV.Core.UI.Dragging
         private void Awake()
         {
             parentCanvas = GetComponentInParent<Canvas>();
-            source = GetComponentInParent<IDragSource<T>>();
+            source = GetComponentInParent<IDragSource<T>>(); // The current place of the IDragSource
         }
 
         // PRIVATE
@@ -59,6 +59,8 @@ namespace GameDevTV.Core.UI.Dragging
             transform.SetParent(originalParent, true);
 
             IDragDestination<T> container;
+
+            // If cursor is over UI
             if (!EventSystem.current.IsPointerOverGameObject())
             {
                 container = parentCanvas.GetComponent<IDragDestination<T>>();
@@ -109,9 +111,9 @@ namespace GameDevTV.Core.UI.Dragging
         private void AttemptSwap(IDragContainer<T> destination, IDragContainer<T> source)
         {
             // Provisionally remove item from both sides. 
-            var removedSourceNumber = source.GetNumber();
+            var removedSourceNumber = source.GetQuantity();
             var removedSourceItem = source.GetItem();
-            var removedDestinationNumber = destination.GetNumber();
+            var removedDestinationNumber = destination.GetQuantity();
             var removedDestinationItem = destination.GetItem();
 
             source.RemoveItems(removedSourceNumber);
@@ -162,7 +164,7 @@ namespace GameDevTV.Core.UI.Dragging
         private bool AttemptSimpleTransfer(IDragDestination<T> destination)
         {
             var draggingItem = source.GetItem();
-            var draggingNumber = source.GetNumber();
+            var draggingNumber = source.GetQuantity();
 
             var acceptable = destination.MaxAcceptable(draggingItem);
             var toTransfer = Mathf.Min(acceptable, draggingNumber);

@@ -18,7 +18,7 @@ namespace GameDevTV.Inventories
         private class DockedItemSlot 
         {
             public ActionItem item;
-            public int number;
+            public int quantity;
         }
 
         // PUBLIC
@@ -31,6 +31,7 @@ namespace GameDevTV.Inventories
         /// <summary>
         /// Get the action at the given index.
         /// </summary>
+        /// <param name="index">Index of the action in question.</param>
         public ActionItem GetAction(int index)
         {
             if (dockedItems.ContainsKey(index))
@@ -43,6 +44,7 @@ namespace GameDevTV.Inventories
         /// <summary>
         /// Get the number of items left at the given index.
         /// </summary>
+        /// <param name="index">Index of slot in question</param>
         /// <returns>
         /// Will return 0 if no item is in the index or the item has
         /// been fully consumed.
@@ -51,7 +53,7 @@ namespace GameDevTV.Inventories
         {
             if (dockedItems.ContainsKey(index))
             {
-                return dockedItems[index].number;
+                return dockedItems[index].quantity;
             }
             return 0;
         }
@@ -61,21 +63,21 @@ namespace GameDevTV.Inventories
         /// </summary>
         /// <param name="item">What item should be added.</param>
         /// <param name="index">Where should the item be added.</param>
-        /// <param name="number">How many items to add.</param>
-        public void AddAction(InventoryItem item, int index, int number)
+        /// <param name="quantity">How many items to add.</param>
+        public void AddAction(InventoryItem item, int index, int quantity)
         {
             if (dockedItems.ContainsKey(index))
             {  
                 if (object.ReferenceEquals(item, dockedItems[index].item))
                 {
-                    dockedItems[index].number += number;
+                    dockedItems[index].quantity += quantity;
                 }
             }
             else
             {
                 var slot = new DockedItemSlot();
                 slot.item = item as ActionItem;
-                slot.number = number;
+                slot.quantity = quantity;
                 dockedItems[index] = slot;
             }
             if (storeUpdated != null)
@@ -107,12 +109,14 @@ namespace GameDevTV.Inventories
         /// <summary>
         /// Remove a given number of items from the given slot.
         /// </summary>
-        public void RemoveItems(int index, int number)
+        /// <param name="index">Index of the item/s in question.</param>
+        /// <param name="quantityToRemove">Number of items to be removed.</param>
+        public void RemoveItems(int index, int quantityToRemove)
         {
             if (dockedItems.ContainsKey(index))
             {
-                dockedItems[index].number -= number;
-                if (dockedItems[index].number <= 0)
+                dockedItems[index].quantity -= quantityToRemove;
+                if (dockedItems[index].quantity <= 0)
                 {
                     dockedItems.Remove(index);
                 }
@@ -159,7 +163,7 @@ namespace GameDevTV.Inventories
         private struct DockedItemRecord
         {
             public string itemID;
-            public int number;
+            public int quantity;
         }
 
         object ISaveable.CaptureState()
@@ -169,7 +173,7 @@ namespace GameDevTV.Inventories
             {
                 var record = new DockedItemRecord();
                 record.itemID = pair.Value.item.GetItemID();
-                record.number = pair.Value.number;
+                record.quantity = pair.Value.quantity;
                 state[pair.Key] = record;
             }
             return state;
@@ -180,7 +184,7 @@ namespace GameDevTV.Inventories
             var stateDict = (Dictionary<int, DockedItemRecord>)state;
             foreach (var pair in stateDict)
             {
-                AddAction(InventoryItem.GetFromID(pair.Value.itemID), pair.Key, pair.Value.number);
+                AddAction(InventoryItem.GetFromID(pair.Value.itemID), pair.Key, pair.Value.quantity);
             }
         }
     }

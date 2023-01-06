@@ -5,7 +5,7 @@ using GameDevTV.Saving;
 namespace GameDevTV.Inventories
 {
     /// <summary>
-    /// To be placed on anything that wishes to drop pickups into the world.
+    /// To be placed on anything that wishes to drop pickups into the world (e.g Player, Enemy prefab).
     /// Tracks the drops for saving and restoring.
     /// </summary>
     public class ItemDropper : MonoBehaviour, ISaveable
@@ -19,13 +19,13 @@ namespace GameDevTV.Inventories
         /// Create a pickup at the current position.
         /// </summary>
         /// <param name="item">The item type for the pickup.</param>
-        /// <param name="number">
+        /// <param name="quantity">
         /// The number of items contained in the pickup. Only used if the item
         /// is stackable.
         /// </param>
-        public void DropItem(InventoryItem item, int number)
+        public void DropItem(InventoryItem item, int quantity)
         {
-            SpawnPickup(item, GetDropLocation(), number);
+            SpawnPickup(item, GetDropLocation(), quantity);
         }
 
         /// <summary>
@@ -40,11 +40,12 @@ namespace GameDevTV.Inventories
         // PROTECTED
 
         /// <summary>
-        /// Override to set a custom method for locating a drop.
+        /// Override to set a custom method for locating a drop. The implementation can change depending on where it is inherited
         /// </summary>
         /// <returns>The location the drop should be spawned.</returns>
         protected virtual Vector3 GetDropLocation()
         {
+            // Spawns item at location of this gameobject
             return transform.position;
         }
 
@@ -61,7 +62,7 @@ namespace GameDevTV.Inventories
         {
             public string itemID;
             public SerializableVector3 position;
-            public int number;
+            public int quantity;
         }
 
         object ISaveable.CaptureState()
@@ -72,7 +73,7 @@ namespace GameDevTV.Inventories
             {
                 droppedItemsList[i].itemID = droppedItems[i].GetItem().GetItemID();
                 droppedItemsList[i].position = new SerializableVector3(droppedItems[i].transform.position);
-                droppedItemsList[i].number = droppedItems[i].GetNumber();
+                droppedItemsList[i].quantity = droppedItems[i].GetQuantity();
             }
             return droppedItemsList;
         }
@@ -84,8 +85,8 @@ namespace GameDevTV.Inventories
             {
                 var pickupItem = InventoryItem.GetFromID(item.itemID);
                 Vector3 position = item.position.ToVector();
-                int number = item.number;
-                SpawnPickup(pickupItem, position, number);
+                int quantity = item.quantity;
+                SpawnPickup(pickupItem, position, quantity);
             }
         }
 

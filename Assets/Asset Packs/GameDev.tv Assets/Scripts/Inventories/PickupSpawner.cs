@@ -11,7 +11,7 @@ namespace GameDevTV.Inventories
     {
         // CONFIG DATA
         [SerializeField] InventoryItem item = null;
-        [SerializeField] int number = 1;
+        [SerializeField] int quantity = 1;
 
         // LIFECYCLE METHODS
         private void Awake()
@@ -43,7 +43,9 @@ namespace GameDevTV.Inventories
 
         private void SpawnPickup()
         {
-            var spawnedPickup = item.SpawnPickup(transform.position, number);
+            var spawnedPickup = item.SpawnPickup(transform.position, quantity);
+
+            // Spawned pickup is going to be a child of this (PickupSpawner)
             spawnedPickup.transform.SetParent(transform);
         }
 
@@ -64,11 +66,13 @@ namespace GameDevTV.Inventories
         {
             bool shouldBeCollected = (bool)state;
 
+            // If pickup should be collected (corrected previously) and it is still displayed, destroy the pickup.
             if (shouldBeCollected && !isCollected())
             {
                 DestroyPickup();
             }
 
+            // If pickup has not been collected but is not displayed, spawn the pickup.
             if (!shouldBeCollected && isCollected())
             {
                 SpawnPickup();

@@ -56,7 +56,7 @@ namespace GameDevTV.UI.Inventories
             return playerEquipment.GetItemInSlot(equipLocation);
         }
 
-        public int GetNumber()
+        public int GetQuantity()
         {
             if (GetItem() != null)
             {

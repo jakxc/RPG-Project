@@ -19,7 +19,7 @@ namespace GameDevTV.Core.UI.Dragging
         /// <summary>
         /// What is the quantity of items in this source?
         /// </summary>
-        int GetNumber();
+        int GetQuantity();
 
         /// <summary>
         /// Remove a given number of items from the source.

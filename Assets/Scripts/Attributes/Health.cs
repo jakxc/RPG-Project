@@ -78,6 +78,7 @@ namespace RPG.Attributes
             else
             {
                 onHealthUpdated.Invoke(); // Invoke onNoHealthLeft event to update health bar
+                
                 /* Trigger all the functions in takeDamage UnityEvent (e.g spawn damage text etc.).
                 The damage float is passed in as arg so DamageTextSpawner can use the correct damage value
                 to spawn as text*/

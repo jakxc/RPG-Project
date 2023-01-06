@@ -7,6 +7,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using GameDevTV.Utils;
 using System;
+using GameDevTV.Inventories;
 
 namespace RPG.Combat
 {
@@ -21,6 +22,7 @@ namespace RPG.Combat
         float timeOutOfCombat = Mathf.Infinity;
         Health target;
         Mover mover;
+        Equipment equipment;
         WeaponConfig currentWeaponConfig;
         /* If currentWeapon value has not been assign the first time it is read, then the Initializer is called.
          If, however, the value is assigned before the initializer is called, then there is no need to 
@@ -32,6 +34,12 @@ namespace RPG.Combat
         private void Awake() 
         {
             mover = GetComponent<Mover>();    
+            equipment = GetComponent<Equipment>();
+
+            if (equipment)
+            {
+                equipment.equipmentUpdated += UpdateWeapon;
+            }
             currentWeaponConfig = defaultWeapon;
             currentWeapon = new LazyValue<Weapon>(SetUpDefaultWeapon);
         }
@@ -84,6 +92,18 @@ namespace RPG.Combat
             Animator anim = GetComponent<Animator>();
             return weapon.Spawn(rightHandTransform, leftHandTransform, anim);
         }
+        private void UpdateWeapon()
+        {
+            WeaponConfig weapon = equipment.GetItemInSlot(EquipLocation.Weapon) as WeaponConfig;
+            if (weapon == null) 
+            {
+                SetWeapon(defaultWeapon);
+            } else
+            {
+                SetWeapon(weapon);
+            }
+        }
+
 
         public Health GetTarget()
         {

@@ -32,6 +32,9 @@ namespace GameDevTV.UI.Inventories
 
         // PRIVATE
 
+        /// <summary>
+        /// Destroys all children of this and reinstantiate each InventorySlotUI with its item and quantity
+        /// </summary>
         private void Redraw()
         {
             foreach (Transform child in transform)

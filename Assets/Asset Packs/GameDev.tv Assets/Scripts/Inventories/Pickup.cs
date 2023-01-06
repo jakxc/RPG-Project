@@ -10,7 +10,7 @@ namespace GameDevTV.Inventories
     {
         // STATE
         InventoryItem item;
-        int number = 1;
+        int quantity = 1;
 
         // CACHED REFERENCE
         Inventory inventory;
@@ -29,15 +29,15 @@ namespace GameDevTV.Inventories
         /// Set the vital data after creating the prefab.
         /// </summary>
         /// <param name="item">The type of item this prefab represents.</param>
-        /// <param name="number">The number of items represented.</param>
-        public void Setup(InventoryItem item, int number)
+        /// <param name="quantity">The number of items represented.</param>
+        public void Setup(InventoryItem item, int quantity)
         {
             this.item = item;
             if (!item.IsStackable())
             {
-                number = 1;
+                quantity = 1;
             }
-            this.number = number;
+            this.quantity = quantity;
         }
 
         public InventoryItem GetItem()
@@ -45,14 +45,14 @@ namespace GameDevTV.Inventories
             return item;
         }
 
-        public int GetNumber()
+        public int GetQuantity()
         {
-            return number;
+            return quantity;
         }
 
         public void PickupItem()
         {
-            bool foundSlot = inventory.AddToFirstEmptySlot(item, number);
+            bool foundSlot = inventory.AddToFirstEmptySlot(item, quantity);
             if (foundSlot)
             {
                 Destroy(gameObject);

@@ -26,6 +26,8 @@ namespace GameDevTV.Inventories
         /// <summary>
         /// Return the item in the given equip location.
         /// </summary>
+        /// <param name="equipLocation">The equipLocation in question.</param>
+        /// <returns>EquitableItem at equipLocation.</returns>
         public EquipableItem GetItemInSlot(EquipLocation equipLocation)
         {
             if (!equippedItems.ContainsKey(equipLocation))
@@ -40,6 +42,8 @@ namespace GameDevTV.Inventories
         /// Add an item to the given equip location. Do not attempt to equip to
         /// an incompatible slot.
         /// </summary>
+        /// <param name="slot">The slot the item will be equipped in.</param>
+        /// <param name="item">The item to be equipped.</param>
         public void AddItem(EquipLocation slot, EquipableItem item)
         {
             Debug.Assert(item.GetAllowedEquipLocation() == slot);
