@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8496148057926860206}
   m_Layer: 0
-  m_Name: LevelUp
+  m_Name: HealEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

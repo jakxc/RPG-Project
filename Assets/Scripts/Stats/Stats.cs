@@ -7,6 +7,7 @@ namespace RPG.Stats
         ExperienceToLevelUp,
         Damage,
         Armour,
-        MagicResist
+        MagicResist,
+        Mana,
     }
 }

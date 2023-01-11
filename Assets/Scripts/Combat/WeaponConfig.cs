@@ -110,7 +110,7 @@ namespace RPG.Combat
 
         public IEnumerable<float> GetPercentageModifiers(Stat stat)
         {
-             if (stat == Stat.Damage)
+            if (stat == Stat.Damage)
             {
                 yield return percentageBonus;
             }

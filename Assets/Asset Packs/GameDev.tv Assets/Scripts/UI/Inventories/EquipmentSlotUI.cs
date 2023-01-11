@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using GameDevTV.Core.UI.Dragging;
 using GameDevTV.Inventories;
 

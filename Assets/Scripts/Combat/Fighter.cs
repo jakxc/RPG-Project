@@ -4,7 +4,6 @@ using GameDevTV.Saving;
 using RPG.Attributes;
 using RPG.Movement;
 using UnityEngine;
-using System.Collections.Generic;
 using GameDevTV.Utils;
 using System;
 using GameDevTV.Inventories;
@@ -14,7 +13,7 @@ namespace RPG.Combat
     public class Fighter : MonoBehaviour, IAction, ISaveable
     {
         [SerializeField] float timeBetweenAttacks = 1f;
-        [SerializeField] float timeToIndicateNotInCombat = 8f; // Used to disable healthbar outside of combat
+        [SerializeField] float timeToIndicateNotInCombat = 5f; // Used to disable healthbar outside of combat
         [SerializeField] Transform rightHandTransform = null;
         [SerializeField] Transform leftHandTransform = null;
         [SerializeField] WeaponConfig defaultWeapon = null;
@@ -59,14 +58,14 @@ namespace RPG.Combat
             timeSinceLastAttack += Time.deltaTime;
             timeOutOfCombat += Time.deltaTime;
             
+            if (timeOutOfCombat > timeToIndicateNotInCombat)
+            {
+                onNotInCombat?.Invoke();
+            }
+            
             // If target is null or dead, do nothing
             if (target == null) return;
             if (target.IsDead()) return; 
-
-            if (timeOutOfCombat > timeToIndicateNotInCombat)
-            {
-                onNotInCombat.Invoke();
-            }
 
             // If target is out of weapon range, move to target
             if (!GetIsInRange(target.transform))

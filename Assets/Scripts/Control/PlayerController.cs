@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.AI;
 using RPG.Movement;
 using RPG.Attributes;
+using GameDevTV.Inventories;
 
 namespace RPG.Control 
 {
@@ -22,6 +23,7 @@ namespace RPG.Control
         [SerializeField] CursorMapping[] cursorMappings = null; // Array of different cursors for each interaction
         [SerializeField] float maxNavMeshProjectionDistance = 1f;
         [SerializeField] float rayCastRadius = 0.5f;
+        [SerializeField] int actionStoreSize = 6;
 
         bool isDraggingUI = false;
 
@@ -32,6 +34,7 @@ namespace RPG.Control
 
         void Update()
         {
+            CheckSpecialAbilityKeys();
             if (InteractWithUI()) return;
             
             if (health.IsDead()) 
@@ -108,7 +111,7 @@ namespace RPG.Control
             return false;
         }
 
-        bool InteractWithMovement()
+        private bool InteractWithMovement()
         { 
             Vector3 target;
             bool hasHit = RaycastNavMesh(out target);
@@ -150,7 +153,7 @@ namespace RPG.Control
             return true;
         }
 
-        Ray GetMouseRay()
+        private Ray GetMouseRay()
         {
             return Camera.main.ScreenPointToRay(Input.mousePosition);
         }
@@ -175,6 +178,18 @@ namespace RPG.Control
                 }
             }
             return cursorMappings[0];
+        }
+
+        private void CheckSpecialAbilityKeys()
+        {
+            var actionStore = GetComponent<ActionStore>();
+            var keyOffset = (int)KeyCode.Alpha1;
+            var slotCount = actionStoreSize; // this will probably be configured
+            for (var i = 0; i < slotCount; i++)
+            {
+                if (Input.GetKeyDown((KeyCode)(i + keyOffset)))
+                    actionStore.Use(i, gameObject);
+            }
         }
     }
 }

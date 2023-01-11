@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using GameDevTV.Inventories;
 using TMPro;
@@ -16,7 +14,7 @@ namespace GameDevTV.UI.Inventories
     {
         // CONFIG DATA
         [SerializeField] GameObject textContainer = null;
-        [SerializeField] TextMeshProUGUI itemNumber = null;
+        [SerializeField] TextMeshProUGUI itemQuantity = null;
 
         // PUBLIC
 
@@ -25,7 +23,7 @@ namespace GameDevTV.UI.Inventories
             SetItem(item, 0);
         }
 
-        public void SetItem(InventoryItem item, int number)
+        public void SetItem(InventoryItem item, int quantity)
         {
             var iconImage = GetComponent<Image>();
             if (item == null)
@@ -38,16 +36,16 @@ namespace GameDevTV.UI.Inventories
                 iconImage.sprite = item.GetIcon();
             }
 
-            if (itemNumber)
+            if (itemQuantity)
             {
-                if (number <= 1)
+                if (quantity <= 1)
                 {
                     textContainer.SetActive(false);
                 }
                 else
                 {
                     textContainer.SetActive(true);
-                    itemNumber.text = number.ToString();
+                    itemQuantity.text = quantity.ToString();
                 }
             }
         }

@@ -14,7 +14,7 @@ namespace GameDevTV.Inventories
     /// `EquipableItem`. Abstract class means you cannot create an InventoryItem itself
     /// but can create classes that inherit from this class (these classes that inherit from abstract classes are called concrete class)
     /// </remarks>
-    public abstract class InventoryItem : ScriptableObject, ISerializationCallbackReceiver //
+    public abstract class InventoryItem : ScriptableObject, ISerializationCallbackReceiver // Ensure Item ID is generated before Unity serializes the item 
     {
         // CONFIG DATA
         [Tooltip("Auto-generated UUID for saving/loading. Clear this field if you want to generate a new one.")]
@@ -46,6 +46,8 @@ namespace GameDevTV.Inventories
         /// </returns>
         public static InventoryItem GetFromID(string itemID)
         {
+            /* If itemLookupCache is null, create an empty dictionary and add 
+            itemID/InventoryItem (key/value) pair to it from Resources */
             if (itemLookupCache == null)
             {
                 itemLookupCache = new Dictionary<string, InventoryItem>();
@@ -71,13 +73,13 @@ namespace GameDevTV.Inventories
         /// Spawn the pickup gameobject into the world. InventoryItem is responsible for spawning its own pickup. 
         /// </summary>
         /// <param name="position">Where to spawn the pickup.</param>
-        /// <param name="number">How many instances of the item does the pickup represent.</param>
+        /// <param name="quantity">How many instances of the item does the pickup represent.</param>
         /// <returns>Reference to the pickup object spawned.</returns>
-        public Pickup SpawnPickup(Vector3 position, int number)
+        public Pickup SpawnPickup(Vector3 position, int quantity)
         {
             var pickup = Instantiate(this.pickup);
             pickup.transform.position = position;
-            pickup.Setup(this, number);
+            pickup.Setup(this, quantity);
             return pickup;
         }
 

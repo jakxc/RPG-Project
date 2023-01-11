@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: Sword
   description: A sharp sword capable of cutting through anything
   icon: {fileID: 21300000, guid: d19901b0ee3c38743a7d383bd484b0b5, type: 3}
-  pickup: {fileID: 6741204306857888290, guid: 55a30aeada2f7fd4b98a127a77a94ec7, type: 3}
+  pickup: {fileID: 958186539013583792, guid: ec4630262c421e34c92e2e57d1178162, type: 3}
   stackable: 0
   allowedEquipLocation: 4
   weaponDamage: 5

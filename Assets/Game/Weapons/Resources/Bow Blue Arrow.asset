@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: Blue Bow
   description: Bow that shoots blue arrows
   icon: {fileID: 21300000, guid: d19901b0ee3c38743a7d383bd484b0b5, type: 3}
-  pickup: {fileID: -7838579415920710612, guid: 0187c44aecf1fe34d9e0a46d63514214, type: 3}
+  pickup: {fileID: 9107759083915833517, guid: dd1ed956564e76846a9b6eaee71abb31, type: 3}
   stackable: 0
   allowedEquipLocation: 4
   weaponDamage: 5

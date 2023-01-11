@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: Fireball
   description: A scroll that allows you to cast fireballs
   icon: {fileID: 21300000, guid: a1ec2c0ddc0da634b85f0f465fec2d0d, type: 3}
-  pickup: {fileID: 2222798682853362326, guid: 929eb119002940142af529b2216f2f11, type: 3}
+  pickup: {fileID: 4771685774251840133, guid: c4ed1155df7799a44983ba122e8b957e, type: 3}
   stackable: 0
   allowedEquipLocation: 4
   weaponDamage: 5

@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Helmet
   m_EditorClassIdentifier: 
   itemID: 118b5b8f-3a94-48ac-a355-8399464c2046
-  displayName: 
-  description: 'A hard hat '
+  displayName: Helmet
+  description: Protective gear to keep the head safe
   icon: {fileID: 21300000, guid: 7a704c5f161380f438bfabaf93560dc3, type: 3}
-  pickup: {fileID: 1376885993918263227, guid: 070a6b818a0ab1c40ad2db2bcb85a993, type: 3}
+  pickup: {fileID: 5853571238376001322, guid: 351e914d762e6f441a16c7e63dc6c5c7, type: 3}
   stackable: 0
   allowedEquipLocation: 0
   additiveModifiers:
   - stat: 4
-    modifierValue: 10
+    value: 10
   percentageModifiers: []

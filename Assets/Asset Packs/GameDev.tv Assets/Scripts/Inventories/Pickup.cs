@@ -9,8 +9,8 @@ namespace GameDevTV.Inventories
     public class Pickup : MonoBehaviour
     {
         // STATE
-        InventoryItem item;
-        int quantity = 1;
+        InventoryItem item; // The item associated with the pickup
+        int quantity = 1; // How many of the InventoryItem is contained in this pickup
 
         // CACHED REFERENCE
         Inventory inventory;

@@ -116,6 +116,8 @@ namespace GameDevTV.Inventories
         /// Remove a number of items from the given slot. Will never remove more
         /// that there are.
         /// </summary>
+        /// <param name="index">The index of the slot</param>
+        /// <param name="quantity">The quantity to be removed</param>
         public void RemoveFromSlot(int index, int quantity)
         {
             slots[index].quantity -= quantity;
@@ -237,25 +239,25 @@ namespace GameDevTV.Inventories
     
         object ISaveable.CaptureState()
         {
-            var slotStrings = new InventorySlotRecord[inventorySize];
+            var slotRecords = new InventorySlotRecord[inventorySize];
             for (int i = 0; i < inventorySize; i++)
             {
                 if (slots[i].item != null)
                 {
-                    slotStrings[i].itemID = slots[i].item.GetItemID();
-                    slotStrings[i].quantity = slots[i].quantity;
+                    slotRecords[i].itemID = slots[i].item.GetItemID();
+                    slotRecords[i].quantity = slots[i].quantity;
                 }
             }
-            return slotStrings;
+            return slotRecords;
         }
 
         void ISaveable.RestoreState(object state)
         {
-            var slotStrings = (InventorySlotRecord[])state;
+            var slotRecords = (InventorySlotRecord[])state;
             for (int i = 0; i < inventorySize; i++)
             {
-                slots[i].item = InventoryItem.GetFromID(slotStrings[i].itemID);
-                slots[i].quantity = slotStrings[i].quantity;
+                slots[i].item = InventoryItem.GetFromID(slotRecords[i].itemID);
+                slots[i].quantity = slotRecords[i].quantity;
             }
             if (inventoryUpdated != null)
             {

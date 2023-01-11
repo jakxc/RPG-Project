@@ -60,7 +60,7 @@ namespace GameDevTV.Core.UI.Dragging
 
             IDragDestination<T> container;
 
-            // If cursor is over UI
+            // If cursor is over UI, then return 
             if (!EventSystem.current.IsPointerOverGameObject())
             {
                 container = parentCanvas.GetComponent<IDragDestination<T>>();

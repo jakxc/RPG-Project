@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: 3250db6b-d20c-43bf-aca8-6a21409cc717
   displayName: Health Potion
-  description: Healths a bit of health
+  description: A standard health potion
   icon: {fileID: 21300000, guid: aba0f700d91d4fc4fa8c724899ab04ab, type: 3}
-  pickup: {fileID: 1376885993918263227, guid: 070a6b818a0ab1c40ad2db2bcb85a993, type: 3}
+  pickup: {fileID: 5853571238376001322, guid: 351e914d762e6f441a16c7e63dc6c5c7, type: 3}
   stackable: 1
   consumable: 1
-  healthToRestore: 20
+  amountToRestore: 25
+  additiveBuffAmount: 0
+  percentageBuffAmount: 0
+  statToModify: 0

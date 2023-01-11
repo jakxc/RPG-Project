@@ -14,6 +14,7 @@ namespace RPG.Attributes
         [SerializeField] float regenerationPercentage = 70f; // % of health that is added when this levels up
         [SerializeField] TakeDamageEvent takeDamage;
         [SerializeField] UnityEvent onDied;
+        [SerializeField] GameObject healEffect;
 
         /* Subclass used because cannot Unity cannot serialize UnityEvent<float> (classes with chevrons). Select Dynamic float in
         Unity Editor to allow the float passed into this event to be used in functions triggered by 
@@ -138,6 +139,7 @@ namespace RPG.Attributes
         public void Heal(float healthToRestore)
         {
              healthPoints.value = Mathf.Min(healthPoints.value + healthToRestore, GetMaxHealth());
+             Instantiate(healEffect, transform);
              onHealthUpdated.Invoke();
         }
 
