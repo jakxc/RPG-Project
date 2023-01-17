@@ -29,7 +29,7 @@ namespace RPG.Combat
 
             if (weaponPrefab != null)
             {
-                Transform handTransform = GetTransform(rightHand, leftHand); // Determines if weapon is equip on right or left hand
+                Transform handTransform = GetHandTransform(rightHand, leftHand); // Determines if weapon is equip on right or left hand
                 weapon = Instantiate(weaponPrefab, handTransform);
                 weapon.gameObject.name = weaponName; // Set weaponName to WeaponConfig name for saving/loading purposes
             }
@@ -66,7 +66,7 @@ namespace RPG.Combat
             Destroy(oldWeapon.gameObject);
         }
 
-        private Transform GetTransform(Transform rightHand, Transform leftHand)
+        private Transform GetHandTransform(Transform rightHand, Transform leftHand)
         {
             Transform handTransform;
             if (isRightHanded) handTransform = rightHand;
@@ -96,7 +96,7 @@ namespace RPG.Combat
 
         public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target, GameObject sourceOfDamage, float calculatedDamage)
         {
-            Projectile projectileInstance = Instantiate(projectile, GetTransform(rightHand, leftHand).position, Quaternion.identity);
+            Projectile projectileInstance = Instantiate(projectile, GetHandTransform(rightHand, leftHand).position, Quaternion.identity);
             projectileInstance.SetTarget(target, calculatedDamage, sourceOfDamage);
         }
 

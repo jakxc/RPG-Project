@@ -27,7 +27,7 @@ namespace RPG.Inventory
 
         protected override Vector3 GetDropLocation()
         {
-            // If random point is not on a NavMesh after 30 attempts, then return it at this location
+            // If random point is not on a NavMesh after 30 attempts, then return this transform position
             for (int i = 0; i < ATTEMPTS; i++)
             {
                 Vector3 randomPoint = transform.position + (Random.insideUnitSphere * scatterDistance);

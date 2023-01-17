@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace GameDevTV.Inventories
@@ -11,10 +10,9 @@ namespace GameDevTV.Inventories
     /// </summary>
     /// <remarks>
     /// In practice, you are likely to use a subclass such as `ActionItem` or
-    /// `EquipableItem`. Abstract class means you cannot create an InventoryItem itself
-    /// but can create classes that inherit from this class (these classes that inherit from abstract classes are called concrete class)
+    /// `EquipableItem`.
     /// </remarks>
-    public abstract class InventoryItem : ScriptableObject, ISerializationCallbackReceiver // Ensure Item ID is generated before Unity serializes the item 
+    public abstract class InventoryItem : ScriptableObject, ISerializationCallbackReceiver
     {
         // CONFIG DATA
         [Tooltip("Auto-generated UUID for saving/loading. Clear this field if you want to generate a new one.")]
@@ -31,7 +29,7 @@ namespace GameDevTV.Inventories
         [SerializeField] bool stackable = false;
 
         // STATE
-        static Dictionary<string, InventoryItem> itemLookupCache; // List of items in Resources
+        static Dictionary<string, InventoryItem> itemLookupCache;
 
         // PUBLIC
 
@@ -46,12 +44,10 @@ namespace GameDevTV.Inventories
         /// </returns>
         public static InventoryItem GetFromID(string itemID)
         {
-            /* If itemLookupCache is null, create an empty dictionary and add 
-            itemID/InventoryItem (key/value) pair to it from Resources */
             if (itemLookupCache == null)
             {
                 itemLookupCache = new Dictionary<string, InventoryItem>();
-                var itemList = Resources.LoadAll<InventoryItem>(""); // Get all InventoryItem type from across the project (empty string means from everywhere in the project) 
+                var itemList = Resources.LoadAll<InventoryItem>("");
                 foreach (var item in itemList)
                 {
                     if (itemLookupCache.ContainsKey(item.itemID))
@@ -60,7 +56,6 @@ namespace GameDevTV.Inventories
                         continue;
                     }
 
-                    // Populates itemLookupCahce with itemID as key and item as value
                     itemLookupCache[item.itemID] = item;
                 }
             }
@@ -70,16 +65,16 @@ namespace GameDevTV.Inventories
         }
         
         /// <summary>
-        /// Spawn the pickup gameobject into the world. InventoryItem is responsible for spawning its own pickup. 
+        /// Spawn the pickup gameobject into the world.
         /// </summary>
         /// <param name="position">Where to spawn the pickup.</param>
-        /// <param name="quantity">How many instances of the item does the pickup represent.</param>
+        /// <param name="number">How many instances of the item does the pickup represent.</param>
         /// <returns>Reference to the pickup object spawned.</returns>
-        public Pickup SpawnPickup(Vector3 position, int quantity)
+        public Pickup SpawnPickup(Vector3 position, int number)
         {
             var pickup = Instantiate(this.pickup);
             pickup.transform.position = position;
-            pickup.Setup(this, quantity);
+            pickup.Setup(this, number);
             return pickup;
         }
 
@@ -110,23 +105,12 @@ namespace GameDevTV.Inventories
 
         // PRIVATE
         
-        /// <summary>
-        /// Generates random ID for item before item is serialized (put on disc)
-        /// </summary>
         void ISerializationCallbackReceiver.OnBeforeSerialize()
         {
             // Generate and save a new UUID if this is blank.
             if (string.IsNullOrWhiteSpace(itemID))
             {
-                itemID = Guid.NewGuid().ToString();
-            }
-            
-            // Test for multiple objects with the same UUID
-            var items = Resources.LoadAll<InventoryItem>(""). //continues below
-                       Where(p => p.GetItemID() == itemID).ToList();
-            if (items.Count > 1)
-            {
-                itemID = Guid.NewGuid().ToString();
+                itemID = System.Guid.NewGuid().ToString();
             }
         }
 

@@ -13,22 +13,14 @@ MonoBehaviour:
   m_Name: Drop Library
   m_EditorClassIdentifier: 
   potentialDrops:
-  - item: {fileID: 11400000, guid: 06e0543f0a292374baf899ac5b1660ab, type: 2}
+  - item: {fileID: 11400000, guid: 5fb5e8c89d1f36d44bc5f9e4ea6dc322, type: 2}
     relativeChance:
-    - 0
-    - 0
-    - 0
-    - 0
-    - 0
-    - 0
-    - 0
-    - 0
-    - 0
-    - 0
+    - 50
+    - 75
     minNumber: 0100000002000000
     maxNumber: 0100000002000000
   dropChancePercentage:
-  - 10
-  - 15
+  - 20
+  - 30
   minDrops: 0100000002000000
-  maxDrops: 0100000002000000
+  maxDrops: 0300000005000000

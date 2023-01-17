@@ -25,9 +25,9 @@ namespace GameDevTV.UI.Inventories
 
         // PUBLIC
 
-        public void AddItems(InventoryItem item, int number)
+        public void AddItems(InventoryItem item, int quantity)
         {
-            store.AddAction(item, index, number);
+            store.AddAction(item, index, quantity);
         }
 
         public InventoryItem GetItem()
@@ -37,7 +37,7 @@ namespace GameDevTV.UI.Inventories
 
         public int GetQuantity()
         {
-            return store.GetNumber(index);
+            return store.GetQuantity(index);
         }
 
         public int MaxAcceptable(InventoryItem item)

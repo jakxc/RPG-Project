@@ -70,11 +70,13 @@ namespace RPG.Combat
             // If target is out of weapon range, move to target
             if (!GetIsInRange(target.transform))
             {
+                timeOutOfCombat = 0f; //Reset time out of combat
                 mover.MoveTo(target.transform.position, 1f);
             }
             // else cancel movement and start attacking
             else
             {
+                timeOutOfCombat = 0f; //Reset time out of combat
                 mover.Cancel();
                 AttackBehaviour();
             }
@@ -91,6 +93,7 @@ namespace RPG.Combat
             Animator anim = GetComponent<Animator>();
             return weapon.Spawn(rightHandTransform, leftHandTransform, anim);
         }
+        
         private void UpdateWeapon()
         {
             WeaponConfig weapon = equipment.GetItemInSlot(EquipLocation.Weapon) as WeaponConfig;
@@ -110,10 +113,7 @@ namespace RPG.Combat
         }
 
         void AttackBehaviour()
-        {
-            // Reset time out of combat
-            timeOutOfCombat = 0f;
-            
+        {   
             transform.LookAt(target.transform);
             
             // Only trigger attack if time since last attack reached cooldown

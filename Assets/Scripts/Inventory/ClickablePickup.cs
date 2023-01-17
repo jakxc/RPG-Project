@@ -7,10 +7,8 @@ namespace RPG.Control
     [RequireComponent(typeof(Pickup))]
     public class ClickablePickup : MonoBehaviour, IRaycastable
     {
-        [SerializeField] bool isRunoverPickup = true;
-
         Pickup pickup;
-        
+
         private void Awake()
         {
             pickup = GetComponent<Pickup>();
@@ -36,20 +34,13 @@ namespace RPG.Control
             }
         }
 
-        public bool HandleRaycast(PlayerController controller)
+        public bool HandleRaycast(PlayerController callingController)
         {
             if (Input.GetMouseButtonDown(0))
             {
-                if (isRunoverPickup)
-                {
-                    controller.GetComponent<Mover>().StartMoveAction(transform.position, 1);
-                }
-                else
-                {
-                    pickup.PickupItem();
-                }
+                callingController.GetComponent<Mover>().StartMoveAction(transform.position, 1);
             }
             return true;
         }
-     }
+    }
 }

@@ -28,6 +28,7 @@ namespace RPG.UI.HealthUI
         {
               health.onHealthUpdated -= UpdateHealthBar;
               health.onNoHealthLeft -= DisableHealthBar;
+              fighter.onNotInCombat -= DisableHealthBar;
         }
    
         private void UpdateHealthBar()

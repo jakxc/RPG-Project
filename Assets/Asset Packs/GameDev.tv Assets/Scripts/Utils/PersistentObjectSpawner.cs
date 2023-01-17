@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace GameDevTV.Utils
@@ -12,7 +11,7 @@ namespace GameDevTV.Utils
     /// class will spawn the prefab only once and set it to persist between
     /// scenes.
     /// </summary>
-    public class PeristentObjectSpawner : MonoBehaviour
+    public class PersistentObjectSpawner : MonoBehaviour
     {
         // CONFIG DATA
         [Tooltip("This prefab will only be spawned once and persisted between " +

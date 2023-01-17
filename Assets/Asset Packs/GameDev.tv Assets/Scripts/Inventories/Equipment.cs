@@ -14,6 +14,7 @@ namespace GameDevTV.Inventories
     public class Equipment : MonoBehaviour, ISaveable
     {
         // STATE
+        // Data stored containing the EquipableItem at each EquipLocation
         Dictionary<EquipLocation, EquipableItem> equippedItems = new Dictionary<EquipLocation, EquipableItem>();
 
         // PUBLIC
@@ -30,6 +31,7 @@ namespace GameDevTV.Inventories
         /// <returns>EquitableItem at equipLocation.</returns>
         public EquipableItem GetItemInSlot(EquipLocation equipLocation)
         {
+            // If there is no EquipLocation key, return null as there would be no EquipableItem on a non-existant location
             if (!equippedItems.ContainsKey(equipLocation))
             {
                 return null;
@@ -46,6 +48,7 @@ namespace GameDevTV.Inventories
         /// <param name="item">The item to be equipped.</param>
         public void AddItem(EquipLocation slot, EquipableItem item)
         {
+            // Ensure the item is allocated to appropriate equipment slot
             Debug.Assert(item.GetAllowedEquipLocation() == slot);
 
             equippedItems[slot] = item;
@@ -73,6 +76,7 @@ namespace GameDevTV.Inventories
         /// </summary>
         public IEnumerable<EquipLocation> GetAllPopulatedSlots()
         {
+            // Return all EquipLocation stored in Equipment 
             return equippedItems.Keys;
         }
 
@@ -80,6 +84,7 @@ namespace GameDevTV.Inventories
 
         object ISaveable.CaptureState()
         {
+            // Cannot use equippedItems because EquipableItem cannot be serialized
             var equippedItemsForSerialization = new Dictionary<EquipLocation, string>();
             foreach (var pair in equippedItems)
             {
@@ -92,9 +97,9 @@ namespace GameDevTV.Inventories
         {
             equippedItems = new Dictionary<EquipLocation, EquipableItem>();
 
-            var equippedItemsForSerialization = (Dictionary<EquipLocation, string>)state;
+            var equippedItemsForDeserialization = (Dictionary<EquipLocation, string>)state;
 
-            foreach (var pair in equippedItemsForSerialization)
+            foreach (var pair in equippedItemsForDeserialization)
             {
                 var item = (EquipableItem)InventoryItem.GetFromID(pair.Value);
                 if (item != null)

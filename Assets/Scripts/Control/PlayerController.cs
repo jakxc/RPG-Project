@@ -91,6 +91,7 @@ namespace RPG.Control
         
         private bool InteractWithUI()
         {   
+            // If mouse button is released, then not draggining anymore
             if (Input.GetMouseButtonUp(0))
             {
                 isDraggingUI = false;
@@ -99,6 +100,7 @@ namespace RPG.Control
             // Returns true if cursor is over UI
             if (EventSystem.current.IsPointerOverGameObject())
             {
+                // If mouse button is down, then dragging is in place
                 if (Input.GetMouseButtonDown(0))
                 {
                     isDraggingUI = true;
@@ -106,7 +108,7 @@ namespace RPG.Control
                 SetCursor(CursorType.UI);
                 return true;
             }
-            if (isDraggingUI) return true;
+            if (isDraggingUI) return true; // It is still interacting with UI even when not over UI, if mouse is still down (dragging)
             
             return false;
         }

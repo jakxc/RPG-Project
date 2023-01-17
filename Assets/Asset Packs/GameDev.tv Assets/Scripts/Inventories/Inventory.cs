@@ -58,12 +58,12 @@ namespace GameDevTV.Inventories
         }
 
         /// <summary>
-        /// Attempt to add the items to the first available slot.
+        /// Attempt to add the items to the first available slot or the slot with the item already in (if stackable).
         /// </summary>
         /// <param name="item">The item to add.</param>
         /// <param name="quantity">The number to add.</param>
         /// <returns>Whether or not the item could be added.</returns>
-        public bool AddToFirstEmptySlot(InventoryItem item, int quantity)
+        public bool AddToPreferredSlot(InventoryItem item, int quantity)
         {
             int i = FindSlot(item);
 
@@ -117,7 +117,7 @@ namespace GameDevTV.Inventories
         /// that there are.
         /// </summary>
         /// <param name="index">The index of the slot</param>
-        /// <param name="quantity">The quantity to be removed</param>
+        /// <param name="quantity">The quantity to be removed from slot</param>
         public void RemoveFromSlot(int index, int quantity)
         {
             slots[index].quantity -= quantity;
@@ -146,7 +146,7 @@ namespace GameDevTV.Inventories
         {
             if (slots[index].item != null)
             {
-                return AddToFirstEmptySlot(item, quantity); ;
+                return AddToPreferredSlot(item, quantity); ;
             }
 
             var i = FindStack(item);
@@ -191,16 +191,19 @@ namespace GameDevTV.Inventories
         /// <summary>
         /// Find an empty slot.
         /// </summary>
-        /// <returns>-1 if all slots are full.</returns>
+        /// <returns>-1 if all slots are full. Else returns index of first empty slot</returns>
         private int FindEmptySlot()
         {
-            for (int i = 0; i < slots.Length; i++)
+            for (int i = 0; i < slots.Length - 1; i++)
             {
+                // If slot is empty, return the index of this slot
                 if (slots[i].item == null)
                 {
                     return i;
                 }
             }
+
+            // If no index of slot is return because they all contain items, return -1
             return -1;
         }
 

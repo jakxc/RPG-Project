@@ -14,6 +14,7 @@ namespace GameDevTV.Inventories
     public class ActionStore : MonoBehaviour, ISaveable
     {
         // STATE
+        // The key is the index of the slot and the value is the DockedItemSlot (the actual slot)
         Dictionary<int, DockedItemSlot> dockedItems = new Dictionary<int, DockedItemSlot>();
         private class DockedItemSlot 
         {
@@ -49,7 +50,7 @@ namespace GameDevTV.Inventories
         /// Will return 0 if no item is in the index or the item has
         /// been fully consumed.
         /// </returns>
-        public int GetNumber(int index)
+        public int GetQuantity(int index)
         {
             if (dockedItems.ContainsKey(index))
             {
@@ -96,7 +97,9 @@ namespace GameDevTV.Inventories
         {
             if (dockedItems.ContainsKey(index))
             {
-                dockedItems[index].item.Use(user);
+                dockedItems[index].item.Use(user); // Call the override Use()
+
+                // If item is consumable, remove 1 from the index of the slot
                 if (dockedItems[index].item.isConsumable())
                 {
                     RemoveItems(index, 1);
@@ -124,8 +127,7 @@ namespace GameDevTV.Inventories
                 {
                     storeUpdated();
                 }
-            }
-            
+            }      
         }
 
         /// <summary>

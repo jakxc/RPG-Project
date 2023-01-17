@@ -52,7 +52,7 @@ namespace GameDevTV.Inventories
 
         public void PickupItem()
         {
-            bool foundSlot = inventory.AddToFirstEmptySlot(item, quantity);
+            bool foundSlot = inventory.AddToPreferredSlot(item, quantity);
             if (foundSlot)
             {
                 Destroy(gameObject);

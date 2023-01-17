@@ -65,7 +65,7 @@ namespace GameDevTV.Inventories
             public string itemID;
             public SerializableVector3 position;
             public int quantity;
-            public int sceneBuildIndex;
+            public int sceneBuildIndex; // To ensure items dropped in one scene does not spawn in another
         }
 
         object ISaveable.CaptureState()
@@ -82,7 +82,7 @@ namespace GameDevTV.Inventories
                 droppedItem.sceneBuildIndex = buildIndex;
                 droppedItemsList.Add(droppedItem);
             }
-            droppedItemsList.AddRange(otherSceneDroppedItems);
+            droppedItemsList.AddRange(otherSceneDroppedItems); // To ensure drops from other scenes are all saved
             return droppedItemsList;
         }
 
@@ -90,13 +90,13 @@ namespace GameDevTV.Inventories
         {
             var droppedItemsList = (List<DropRecord>)state;
             int buildIndex = SceneManager.GetActiveScene().buildIndex;
-            otherSceneDroppedItems.Clear();
+            otherSceneDroppedItems.Clear(); // To ensure duplicate items are not added to otherSceneDroppedItems
             foreach (var item in droppedItemsList)
             {
                 if (item.sceneBuildIndex != buildIndex)
                 {
                     otherSceneDroppedItems.Add(item);
-                    continue;
+                    continue; // Do not spawn the Pickup if it is from another scene
                 }
                 
                 var pickupItem = InventoryItem.GetFromID(item.itemID);

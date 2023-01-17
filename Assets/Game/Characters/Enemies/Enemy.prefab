@@ -335,6 +335,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f6028f0fab1494ab3bff1d417aca70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scatterDistance: 1
+  scatterDistance: 5
   dropLibrary: {fileID: 11400000, guid: b5b16d51ac3df53459b2fdc6886cfe98, type: 2}
-  numberOfDrops: 1
