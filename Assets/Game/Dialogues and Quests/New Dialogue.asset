@@ -1,5 +1,70 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7536833480155741285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80dedeabd3629924ca2539b6453490bd, type: 3}
+  m_Name: 4cea98ea-b037-4293-bbdf-02372bf11e82
+  m_EditorClassIdentifier: 
+  speaker: 1
+  text: 
+  children:
+  - ff74e5a2-6d67-4d29-b68e-1ffacbf43f67
+  rect:
+    serializedVersion: 2
+    x: 10
+    y: 19
+    width: 200
+    height: 100
+--- !u!114 &-4419943260736251727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80dedeabd3629924ca2539b6453490bd, type: 3}
+  m_Name: 2577c2b7-d3b1-464f-aed5-dac2c88f6122
+  m_EditorClassIdentifier: 
+  speaker: 2
+  text: 
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 574
+    y: 235.99998
+    width: 200
+    height: 100
+--- !u!114 &-2535527021367350060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80dedeabd3629924ca2539b6453490bd, type: 3}
+  m_Name: ff74e5a2-6d67-4d29-b68e-1ffacbf43f67
+  m_EditorClassIdentifier: 
+  speaker: 0
+  text: 
+  children:
+  - 2577c2b7-d3b1-464f-aed5-dac2c88f6122
+  rect:
+    serializedVersion: 2
+    x: 287.00003
+    y: 144
+    width: 200
+    height: 100
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13,32 +78,7 @@ MonoBehaviour:
   m_Name: New Dialogue
   m_EditorClassIdentifier: 
   nodes:
-  - uniqueID: 2d86f7dd-eec4-4d4f-87a7-31cae5d1d03a
-    text: Hello
-    children:
-    - c581ccb8-82f6-4e0f-815d-97bfca590077
-    - ba7bda8d-9f44-4e06-a29a-d1012b8b461e
-    rect:
-      serializedVersion: 2
-      x: 50.000008
-      y: 38
-      width: 200
-      height: 100
-  - uniqueID: c581ccb8-82f6-4e0f-815d-97bfca590077
-    text: Goodbye!
-    children: []
-    rect:
-      serializedVersion: 2
-      x: 429
-      y: 212
-      width: 200
-      height: 100
-  - uniqueID: ba7bda8d-9f44-4e06-a29a-d1012b8b461e
-    text: Hi!
-    children: []
-    rect:
-      serializedVersion: 2
-      x: 416.00003
-      y: 14
-      width: 200
-      height: 100
+  - {fileID: -7536833480155741285}
+  - {fileID: -2535527021367350060}
+  - {fileID: -4419943260736251727}
+  newNodeOffset: {x: 250, y: 0}
