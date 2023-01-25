@@ -1,0 +1,165 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7536833480155741285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80dedeabd3629924ca2539b6453490bd, type: 3}
+  m_Name: 4cea98ea-b037-4293-bbdf-02372bf11e82
+  m_EditorClassIdentifier: 
+  speaker: 0
+  text: Hi
+  children:
+  - ff74e5a2-6d67-4d29-b68e-1ffacbf43f67
+  rect:
+    serializedVersion: 2
+    x: 12
+    y: 141
+    width: 200
+    height: 100
+  onEnterAction: 
+  onExitAction: GiveQuest
+--- !u!114 &-5726455975329607028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80dedeabd3629924ca2539b6453490bd, type: 3}
+  m_Name: 61bd36c8-dd83-4b3f-9c04-78dd5530e4f6
+  m_EditorClassIdentifier: 
+  speaker: 0
+  text: Thanks!
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 890
+    y: 38.999992
+    width: 200
+    height: 100
+  onEnterAction: 
+  onExitAction: TestObjective
+--- !u!114 &-4419943260736251727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80dedeabd3629924ca2539b6453490bd, type: 3}
+  m_Name: 2577c2b7-d3b1-464f-aed5-dac2c88f6122
+  m_EditorClassIdentifier: 
+  speaker: 0
+  text: I need help
+  children:
+  - 2a8034f7-06cf-40f4-b5b2-9144cbc61e5e
+  - d0c8653a-5093-4de5-8ad4-c2d981a80cc8
+  rect:
+    serializedVersion: 2
+    x: 449
+    y: 158
+    width: 200
+    height: 100
+  onEnterAction: 
+  onExitAction: 
+--- !u!114 &-2535527021367350060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80dedeabd3629924ca2539b6453490bd, type: 3}
+  m_Name: ff74e5a2-6d67-4d29-b68e-1ffacbf43f67
+  m_EditorClassIdentifier: 
+  speaker: 1
+  text: hello
+  children:
+  - 2577c2b7-d3b1-464f-aed5-dac2c88f6122
+  rect:
+    serializedVersion: 2
+    x: 230.00003
+    y: 263
+    width: 200
+    height: 100
+  onEnterAction: 
+  onExitAction: 
+--- !u!114 &-1618832210969330816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80dedeabd3629924ca2539b6453490bd, type: 3}
+  m_Name: 2a8034f7-06cf-40f4-b5b2-9144cbc61e5e
+  m_EditorClassIdentifier: 
+  speaker: 1
+  text: No I cannot help
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 661
+    y: 352
+    width: 200
+    height: 100
+  onEnterAction: 
+  onExitAction: 
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32655ed227ea37d4089978acc0b26747, type: 3}
+  m_Name: New Dialogue
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: -7536833480155741285}
+  - {fileID: -2535527021367350060}
+  - {fileID: -4419943260736251727}
+  - {fileID: -1618832210969330816}
+  - {fileID: 7289662336677224881}
+  - {fileID: -5726455975329607028}
+  newNodeOffset: {x: 250, y: 0}
+--- !u!114 &7289662336677224881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80dedeabd3629924ca2539b6453490bd, type: 3}
+  m_Name: d0c8653a-5093-4de5-8ad4-c2d981a80cc8
+  m_EditorClassIdentifier: 
+  speaker: 1
+  text: Yes I can help
+  children:
+  - 61bd36c8-dd83-4b3f-9c04-78dd5530e4f6
+  rect:
+    serializedVersion: 2
+    x: 667
+    y: 16.999992
+    width: 200
+    height: 100
+  onEnterAction: 
+  onExitAction: 

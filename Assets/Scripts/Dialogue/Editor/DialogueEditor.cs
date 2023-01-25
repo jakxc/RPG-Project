@@ -172,6 +172,7 @@ namespace RPG.Dialogue.Editor
             {
                 nodeToDelete = node;
             }
+            
             GUILayout.EndHorizontal();
 
             GUILayout.EndArea();
