@@ -5,7 +5,7 @@ using RPG.Stats;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace RPG.Inventory
+namespace RPG.Inventories
 {
     public class RandomDropper : ItemDropper
     {

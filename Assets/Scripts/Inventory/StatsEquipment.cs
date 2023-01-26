@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using GameDevTV.Inventories;
 using RPG.Stats;
 
-namespace RPG.Inventory
+namespace RPG.Inventories
 {
     public class StatsEquipment : Equipment, IModifierProvider
     {

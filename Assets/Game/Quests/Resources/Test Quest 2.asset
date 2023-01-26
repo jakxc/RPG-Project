@@ -12,7 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ff36c6c8f35b6a4ca007afc168732d8, type: 3}
   m_Name: Test Quest 2
   m_EditorClassIdentifier: 
+  questID: 83acc8b7-4f7c-4c70-b530-24ebf2b75a73
   objectives:
-  - objectve 3
-  - objectve 4
-  - objectve 5
+  - reference: obj3
+    description: Todo1
+  - reference: obj4
+    description: Todo2
+  - reference: obj5
+    description: Todo3
+  rewards:
+  - quantity: 10
+    item: {fileID: 11400000, guid: 5fb5e8c89d1f36d44bc5f9e4ea6dc322, type: 2}

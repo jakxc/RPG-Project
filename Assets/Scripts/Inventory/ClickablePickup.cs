@@ -1,8 +1,9 @@
 using GameDevTV.Inventories;
+using RPG.Control;
 using RPG.Movement;
 using UnityEngine;
 
-namespace RPG.Control
+namespace RPG.Inventories
 {
     [RequireComponent(typeof(Pickup))]
     public class ClickablePickup : MonoBehaviour, IRaycastable

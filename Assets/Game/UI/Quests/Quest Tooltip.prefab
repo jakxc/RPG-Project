@@ -140,6 +140,7 @@ MonoBehaviour:
   objectiveContainer: {fileID: 6720898991202575432}
   objectivePrefab: {fileID: 8597639168891892676, guid: 2ba608a2bd3525b45b18ca18ce081f93, type: 3}
   objectIncompletePrefab: {fileID: 5369904110522891248, guid: c85b3b70b83c03e41b179d6704521dc2, type: 3}
+  rewardText: {fileID: 6228643363781649091}
 --- !u!1 &1139603381168878425
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,8 +639,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
