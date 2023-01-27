@@ -21,9 +21,9 @@ namespace RPG.UI.Quests
         private void Redraw()
         {
             // Remove dangling placeholder quests
-            foreach (Transform child in GetComponentInChildren<Transform>())
+            foreach (Transform item in transform)
             {
-                Destroy(child.gameObject);
+                Destroy(item.gameObject);
             }
 
             foreach (QuestStatus status in questList.GetStatuses())

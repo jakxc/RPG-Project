@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using GameDevTV.Inventories;
 using GameDevTV.Saving;
+using RPG.Core;
 using UnityEngine;
 
 namespace RPG.Quests
 {
-    public class QuestList : MonoBehaviour, ISaveable
+    public class QuestList : MonoBehaviour, ISaveable, IPredicateEvaluator
     {
         List<QuestStatus> statuses = new List<QuestStatus>();
 
@@ -115,6 +116,19 @@ namespace RPG.Quests
             {
                 statuses.Add(new QuestStatus(objectState));
             }
+        }
+
+        public bool? Evaluate(Predicate predicate, string[] parameters)
+        {
+            switch (predicate)
+            {
+                case Predicate.HasQuest:
+                    return HasQuest(Quest.GetByID(parameters[0]));
+                case Predicate.CompletedQuest:
+                    return GetQuestStatus(Quest.GetByID(parameters[0])).IsComplete();
+            }
+
+            return null;
         }
     }
 }

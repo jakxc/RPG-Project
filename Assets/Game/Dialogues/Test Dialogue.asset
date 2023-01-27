@@ -21,6 +21,9 @@ MonoBehaviour:
     y: 331
     width: 200
     height: 100
+  condition:
+    predicate: 
+    parameters: []
   onEnterAction: 
   onExitAction: TestObjective2
 --- !u!114 &-8094025300033868339
@@ -45,31 +48,11 @@ MonoBehaviour:
     y: 219
     width: 200
     height: 100
+  condition:
+    predicate: 
+    parameters: []
   onEnterAction: 
   onExitAction: TestObjective2
---- !u!114 &-5257593170612591527
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80dedeabd3629924ca2539b6453490bd, type: 3}
-  m_Name: 18395823-f2b1-485e-9a5e-dca718306abe
-  m_EditorClassIdentifier: 
-  speaker: 0
-  text: 
-  children: []
-  rect:
-    serializedVersion: 2
-    x: 895
-    y: 367
-    width: 200
-    height: 100
-  onEnterAction: 
-  onExitAction: 
 --- !u!114 &-4254787468125284481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,6 +76,9 @@ MonoBehaviour:
     y: 112.00001
     width: 200
     height: 100
+  condition:
+    predicate: 
+    parameters: []
   onEnterAction: 
   onExitAction: 
 --- !u!114 &-2237045016592975459
@@ -118,6 +104,9 @@ MonoBehaviour:
     y: 33
     width: 200
     height: 100
+  condition:
+    predicate: 
+    parameters: []
   onEnterAction: 
   onExitAction: 
 --- !u!114 &-307261519850941398
@@ -141,6 +130,9 @@ MonoBehaviour:
     y: 431.00003
     width: 200
     height: 100
+  condition:
+    predicate: 
+    parameters: []
   onEnterAction: 
   onExitAction: Attack
 --- !u!114 &11400000
@@ -160,7 +152,6 @@ MonoBehaviour:
   - {fileID: 3335715998701020896}
   - {fileID: -2237045016592975459}
   - {fileID: -8094025300033868339}
-  - {fileID: -5257593170612591527}
   - {fileID: 3811922365982241014}
   - {fileID: 1988325518153722531}
   - {fileID: -307261519850941398}
@@ -187,6 +178,9 @@ MonoBehaviour:
     y: 98
     width: 200
     height: 100
+  condition:
+    predicate: 
+    parameters: []
   onEnterAction: 
   onExitAction: TestObjective
 --- !u!114 &3335715998701020896
@@ -213,6 +207,9 @@ MonoBehaviour:
     y: 283
     width: 200
     height: 100
+  condition:
+    predicate: 
+    parameters: []
   onEnterAction: 
   onExitAction: 
 --- !u!114 &3811922365982241014
@@ -236,5 +233,8 @@ MonoBehaviour:
     y: -7.9999924
     width: 200
     height: 100
+  condition:
+    predicate: 
+    parameters: []
   onEnterAction: 
   onExitAction: TestObjective
